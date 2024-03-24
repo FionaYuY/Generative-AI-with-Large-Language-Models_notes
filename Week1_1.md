@@ -86,13 +86,44 @@ The official lecture notes is on : https://community.deeplearning.ai/t/genai-wit
 25. After all of the attention weights have been applied to your input data, the output is processed through a fully-connected feed-forward network. The output of this layer is a vector of logits proportional to the probability score for each and every token in the tokenizer dictionary. You can pass these logits to a final softmax layer, where there are normalized into a probability score for each word. 
 ![image](https://github.com/FionaYuY/Generative-AI-with-Large-Language-Models_notes/blob/9d53bbd4dcd21f90de5018fe0bfac8eb5e56d8bf/screenshots%20of%20lecture%20slides/0050.jpg)
 
-
-
-
-
-
-
-
+## Generating text with transformers
+1. Translation: sequence-to-sequence task.
+   - Task: translate the French phrase into English.
+     ![image](https://github.com/FionaYuY/Generative-AI-with-Large-Language-Models_notes/blob/0f8c104863f5af4b69927b3752301d3e8097e9b1/screenshots%20of%20lecture%20slides/0052.jpg)
+   - First, tokenize the input using the same tokenizer that was used to train the network
+     ![image](https://github.com/FionaYuY/Generative-AI-with-Large-Language-Models_notes/blob/0f8c104863f5af4b69927b3752301d3e8097e9b1/screenshots%20of%20lecture%20slides/0053.jpg)
+   - These tokens are then added into the input on the encoder side of the network, passed through embedding layer, and then fed into the multi-headed attention layers.
+      ![image](https://github.com/FionaYuY/Generative-AI-with-Large-Language-Models_notes/blob/0f8c104863f5af4b69927b3752301d3e8097e9b1/screenshots%20of%20lecture%20slides/0054.jpg)
+   - The outputs of the multi-headed attention layers are fed through a feed-forward network to the output of the encoder.
+   - Now, the data that leaves the encoder is a deep representation of the structure and meaning of the input sequence.
+   - This representation is inserted into the middle of the decoder to influence the decoder's self-attention mechanisms.
+     ![image](https://github.com/FionaYuY/Generative-AI-with-Large-Language-Models_notes/blob/0f8c104863f5af4b69927b3752301d3e8097e9b1/screenshots%20of%20lecture%20slides/0055.jpg)
+   - A start of sequence token is added to the input of the decoder.
+   - This triggers the decoder to predict the next token, which it does based on the contextual understanding that is being provided from the encoder.
+     ![image](https://github.com/FionaYuY/Generative-AI-with-Large-Language-Models_notes/blob/0f8c104863f5af4b69927b3752301d3e8097e9b1/screenshots%20of%20lecture%20slides/0056.jpg)
+   - The output of the decoder's self-attention layers gets passed through the decoder feed-forward network and through a final softmax output layer. At this point, we have our first token.
+     ![image](https://github.com/FionaYuY/Generative-AI-with-Large-Language-Models_notes/blob/0f8c104863f5af4b69927b3752301d3e8097e9b1/screenshots%20of%20lecture%20slides/0057.jpg)
+   - Continue the loop, passing the output token back to the input to trigger the generation of the next token, until the model predicts an end-of-sequence token.
+     ![image](https://github.com/FionaYuY/Generative-AI-with-Large-Language-Models_notes/blob/0f8c104863f5af4b69927b3752301d3e8097e9b1/screenshots%20of%20lecture%20slides/0058.jpg)
+   - At this point, the final sequence of tokens can be detokenized into words, and that's your output.
+     ![image](https://github.com/FionaYuY/Generative-AI-with-Large-Language-Models_notes/blob/0f8c104863f5af4b69927b3752301d3e8097e9b1/screenshots%20of%20lecture%20slides/0059.jpg)
+2. There are many ways to use the output from the softmax layer to predict the next token, these can influence how creative the generated text is.
+3. In conclusion, the transformer architecture consists of encoder and decoder component.
+   ![image](https://github.com/FionaYuY/Generative-AI-with-Large-Language-Models_notes/blob/e997f2ff98b6edc5ffe281ea20ccd831ad8ebe31/screenshots%20of%20lecture%20slides/0061.jpg)
+4. Encoder Only models
+   - also works as sequence-to-sequence models, but without further modification, the input sequence and the output sequence are the same length. 
+   - less common these days, but by adding additional layers to the architecture, you can train encoder-only models to perform classification tasks such as sentiment analysis.
+   - ex: BERT
+5. Encoder-decoder models
+   - perform well on sequence-to-sequence tasks such as translation, where the input sequence and the output sequence can be in different lengths.
+   - By scaling and training this kind of model, it can perform general text generation tasks.
+   - ex: BART 
+4. Decoder-only models
+   - some of the most commonly used today
+   - once they're scaled, their capabilities have grown.
+   - These models can now generalize to most tasks.
+   - ex: GPT family, BLOOM, Jurrassic, LLaMA...
+![image](https://github.com/FionaYuY/Generative-AI-with-Large-Language-Models_notes/blob/bd52098e56ffab4397ab4e7b66abfdefeb0f2ea4/screenshots%20of%20lecture%20slides/0062.jpg)
 
 
 
