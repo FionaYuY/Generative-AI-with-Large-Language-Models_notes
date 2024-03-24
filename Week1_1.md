@@ -78,9 +78,13 @@ The official lecture notes is on : https://community.deeplearning.ai/t/genai-wit
 18. As you add the token vectors into the base of the encoder or the decoder, you also add positonal encoding. The model processes each of the input tokens in parallel, so by adding positional encoding, you preserve the information about the word order and don't lose the relevance of the positon of the word in the sentence.
 ![image](https://github.com/FionaYuY/Generative-AI-with-Large-Language-Models_notes/blob/547fac9c8d437a82f91b144733092578451ea624/screenshots%20of%20lecture%20slides/0047.jpg)
 19. Once you've summed the input tokens and the positional encodings, you pass the resulting vectors to the self-attention layer. The model will analyzes the relationships bettween the tokens in your input sequence.
-20. The self-attention weights that are learned during training and stored in these layers reflect hte importance of each word in that input sequence to all other words in the sequence. This doesn't happen just once, the transformer architecute actually has multi-headed self-attention. This means that multiple sets of self-attnetion weights or heads are learned in parallel independently to each other.
-21. The number of attention heads included in the attention layer varies from model to model, range in 12-100 are common.
-22. Each self-attention head will learn a different aspect of language.
+![image](https://github.com/FionaYuY/Generative-AI-with-Large-Language-Models_notes/blob/9d53bbd4dcd21f90de5018fe0bfac8eb5e56d8bf/screenshots%20of%20lecture%20slides/0048.jpg)
+21. The self-attention weights that are learned during training and stored in these layers reflect hte importance of each word in that input sequence to all other words in the sequence. This doesn't happen just once, the transformer architecute actually has multi-headed self-attention. This means that multiple sets of self-attnetion weights or heads are learned in parallel independently to each other.
+22. The number of attention heads included in the attention layer varies from model to model, range in 12-100 are common.
+23. Each self-attention head will learn a different aspect of language.
+24. The weights of each head are randomly initialized and given sufficient training data and time, each will learn different aspects of language.
+25. After all of the attention weights have been applied to your input data, the output is processed through a fully-connected feed-forward network. The output of this layer is a vector of logits proportional to the probability score for each and every token in the tokenizer dictionary. You can pass these logits to a final softmax layer, where there are normalized into a probability score for each word. 
+![image](https://github.com/FionaYuY/Generative-AI-with-Large-Language-Models_notes/blob/9d53bbd4dcd21f90de5018fe0bfac8eb5e56d8bf/screenshots%20of%20lecture%20slides/0050.jpg)
 
 
 
