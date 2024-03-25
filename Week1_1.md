@@ -174,6 +174,23 @@ The official lecture notes is on : https://community.deeplearning.ai/t/genai-wit
 ![image](https://github.com/FionaYuY/Generative-AI-with-Large-Language-Models_notes/blob/fd8ed95ae8d637cbeb65b52fd3a71fae2b0fd610/screenshots%20of%20lecture%20slides/0081.jpg)
 15. if temperture=1, this will leave the softmax function as default, and the unaltered probability distribution will be used.
 
+## Genrative AI project lifecycle
+![image](https://github.com/FionaYuY/Generative-AI-with-Large-Language-Models_notes/blob/c106d0c11df1eea08bde0f0467e982d0b2d6b66e/screenshots%20of%20lecture%20slides/0083.jpg)
+1. Scope
+   - Define the scope as accurately and narrowly as you can.
+   - carry out many different tasks vs. specific tasks only
+2. Select
+   - Train your own model from scratch vs. work with an existing base model
+3. Adapt and align model
+   - prompt engineering can sometimes be enough to get your model to perform well, so you can start by trying in-context learning.
+   - Once your model doesn't perform as well as you need -> fine-tuning
+   - As models become more capable, it's becoming increasingly important to ensure that they behave well and in a way that is aligned with human preferences in deployment.
+   - Evaluation
+   - Note that this adapt and align stage can be highly iterative.
+4. Application integration
+   - optimize your model for deployment
+   - consider any additional infrastructure that your application will require to work well.
+  
 
 
 
