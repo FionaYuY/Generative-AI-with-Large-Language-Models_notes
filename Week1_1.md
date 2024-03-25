@@ -125,7 +125,13 @@ The official lecture notes is on : https://community.deeplearning.ai/t/genai-wit
    - ex: GPT family, BLOOM, Jurrassic, LLaMA...
 ![image](https://github.com/FionaYuY/Generative-AI-with-Large-Language-Models_notes/blob/bd52098e56ffab4397ab4e7b66abfdefeb0f2ea4/screenshots%20of%20lecture%20slides/0062.jpg)
 
-
+## Tranformers: Attention is all you need
+![image](https://github.com/FionaYuY/Generative-AI-with-Large-Language-Models_notes/blob/92270cab1830b65ccd4d7033b04faae1fccff584/screenshots%20of%20lecture%20slides/transformer_image.png)
+1. The Transformer model uses self-attention to compute representations of input sequences, which allows it to capture long-term dependencies and parallelize computation effectively.
+2. The Transformer architecture consists of an encoder and a decoder, each of which is composed of several layers. Each layer consists of two sub-layers: a multi-head self-attention mechanism and a feed-forward neural network.
+3. The multi-head self-attention mechanism allows the model to attend to different parts of the input sequence, while the feed-forward network applies a point-wise fully connected layer to each position separately and identically. 
+4. The Transformer model also uses residual connections and layer normalization to facilitate training and prevent overfitting.
+5. The authors introduce a positional encoding scheme that encodes the position of each token in the input sequence, enabling the model to capture the order of the sequence without the need for recurrent or convolutional operations.
 
 
 
