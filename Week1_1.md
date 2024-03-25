@@ -133,7 +133,57 @@ The official lecture notes is on : https://community.deeplearning.ai/t/genai-wit
 4. The Transformer model also uses residual connections and layer normalization to facilitate training and prevent overfitting.
 5. The authors introduce a positional encoding scheme that encodes the position of each token in the input sequence, enabling the model to capture the order of the sequence without the need for recurrent or convolutional operations.
 
+## Prompting and promt engineering
+1. 'Prompt engineering': you may have to revise the language in your prompt or the way that it's written several times to get the model to behave in the way that you waant.
+2. 'In-context learning': Providing examples inside the context window.
+3. In-context leraning (ICL) - zero shot inference (not example provided)
+   - involves providing an example question with answer followed by a second question to be answered by the LLM.
+   - Largest of the LLM are good at this
+   - Smaller model aren't good at this
+5. In-context learning (ICL) - one shot inference (provide one example)
+6. In-context learning (ICL) - few shot inference (provide multiple examples)
+7. Generally, your model isn't performing well even if you provide 5~6 examples, you should fine-tune the model.
+8. There's a limit in context window
 
+## Generative configuration
+1. Each model exposes a set of configuration parameters that can influence the model's output during inference.
+2. Different from the training parameters which are learned during training time. These configuration parameters are invoked at inference time.
+3. 'Max new tokens': The model of tokens that the model will generate
+![image](https://github.com/FionaYuY/Generative-AI-with-Large-Language-Models_notes/blob/e5b4b44613424e4ddf96c500b4756e295487ca62/screenshots%20of%20lecture%20slides/0075.jpg)
+4. The output from the transformer's softmax layer is a probability distribution across the entire dictionary of words that the model uses.
+5. Most LLM by default will operate with 'greedy decoding'.
+6. 'Greedy decoding': the simplest form of next-word prediction, where the model will always choose the word with the highest probability
+   - This method can work very well for short generation but is susceptible to repeated words or repeated sequences of words.
+7. 'Random sampling': the easiest way to introduce some variability.
+   - The model chooses an output word at random using the probability distribution to weight the selection.
+   - By using random sampling, it reduces the likelihood that words will be repeated.
+   - Depending on the setting, there is a possibility that the output may be too creative, producting words that cause the generation to wander off into topics or words that just don't make sense.
+![image](https://github.com/FionaYuY/Generative-AI-with-Large-Language-Models_notes/blob/b21f783b52c5181b4d301428f65107a58f4bd438/screenshots%20of%20lecture%20slides/0076.jpg)
+8. Top p and top k are sampling techniques that we can use to help limit the random sampling and increase the chance that the output will be sensible.
+9. 'Top k': to limit the oprions while still allowing some variability, you can specify a top k value which instructs the model to choose from only the k tokens with the highest probability.
+   - For example, k=3, which restricts the model to choose from the highest three options. The model then selects from these options using the probability weighting.
+   - This moethod can help the model have some randomness while preventing the selection of highly improbable completion words
+![image](https://github.com/FionaYuY/Generative-AI-with-Large-Language-Models_notes/blob/817d030cbf6019a64117d423b45c84526eb2a03a/screenshots%20of%20lecture%20slides/0078.jpg)
+10. 'Top p': limit the random sampling to the predictions whose combined probabilities (cumulative probabilities) do not exceed p.
+![image](https://github.com/FionaYuY/Generative-AI-with-Large-Language-Models_notes/blob/f0ddf0dfc8876ba18cc79810e509ae71fc758452/screenshots%20of%20lecture%20slides/0079.jpg)
+12. Top k, specify the number of the tokens to randomly choose from. Top p, specify the total probability that you want the model to choose from.
+13. 'Temperature': influences the shape of the probability distribution that the model calculates for the next token.
+    - The higher the temperature, the higher the randomness.
+    - The temperature value is a scaling factor that's applied within the final softmax layer of the model that impacts the shape of the probability diestribution of the next token.
+14. In contrast to the top p and top k, changing the temperaure actually alters the predictions that the model will make.
+![image](https://github.com/FionaYuY/Generative-AI-with-Large-Language-Models_notes/blob/fd8ed95ae8d637cbeb65b52fd3a71fae2b0fd610/screenshots%20of%20lecture%20slides/0081.jpg)
+15. if temperture=1, this will leave the softmax function as default, and the unaltered probability distribution will be used.
+
+
+
+
+
+
+
+
+
+
+   
 
 
 
