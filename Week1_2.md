@@ -123,7 +123,7 @@
     -  The second figure shows 7% decrease in per GPU teraflops when increasing the number of GPUs from 8~512 for the 11 billion T5 model, plotted here using a batch size of 16 in orange and a batch size of eight in blue.
     -  As the model grows in size and is distributed across more and more GPUs, the increase in communication volume between chips starts to impact the performance, slowing down the computation.
     -  In summary, this shows that you can use FSDP for both small and large models and seamlessly scale your model training across multiple GPUs.
-
+![image](https://github.com/FionaYuY/Generative-AI-with-Large-Language-Models_notes/blob/b1a09f360cee4113461a1bf7aeac8cf9833c2621/screenshots%20of%20lecture%20slides/0138.jpg)
 
 
 
