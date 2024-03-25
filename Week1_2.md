@@ -125,6 +125,51 @@
     -  In summary, this shows that you can use FSDP for both small and large models and seamlessly scale your model training across multiple GPUs.
 ![image](https://github.com/FionaYuY/Generative-AI-with-Large-Language-Models_notes/blob/b1a09f360cee4113461a1bf7aeac8cf9833c2621/screenshots%20of%20lecture%20slides/0138.jpg)
 
+## Scaling laws and compute-optimal models
+1. Scaling choices for pre-training
+![image](https://github.com/FionaYuY/Generative-AI-with-Large-Language-Models_notes/blob/d46ec4a080a80380c0000602ad81eeaa72cf1116/screenshots%20of%20lecture%20slides/0140.jpg)
+2. Compute budget for training LLMs
+![image](https://github.com/FionaYuY/Generative-AI-with-Large-Language-Models_notes/blob/1d49615480e0f4446763d620078614ca63302834/screenshots%20of%20lecture%20slides/0141.jpg)
+![image](https://github.com/FionaYuY/Generative-AI-with-Large-Language-Models_notes/blob/1d49615480e0f4446763d620078614ca63302834/screenshots%20of%20lecture%20slides/0142.jpg)
+3. Number of petaflop/s-days to pre-train various LLMs
+![image](https://github.com/FionaYuY/Generative-AI-with-Large-Language-Models_notes/blob/9ce1bd104473ed38f64b03a36c7a0f6d062c42a5/screenshots%20of%20lecture%20slides/0143.jpg)
+4. Compute budget vs. model performance
+   - The lower test loss is, the better the performance
+   - Compute resource constraints:
+     * Hardware
+     * Project timeline
+     * Financial budget
+![image](https://github.com/FionaYuY/Generative-AI-with-Large-Language-Models_notes/blob/613214e9860296f7b893ef5104c11ed202d21c5b/screenshots%20of%20lecture%20slides/0144.jpg)
+5. Dataset size and model size vs. performance
+![image](https://github.com/FionaYuY/Generative-AI-with-Large-Language-Models_notes/blob/232147b7bfe82a553feaa50b81c334b54d77cf23/screenshots%20of%20lecture%20slides/0146.jpg)
+6. What's the ideal balance between these three quantities?
+   - ChinChilla paper: The goal was to find the optimal number of parameters and volume of training data for a give compute budget.   
+7. ChinChilla paper
+   - Many of the 100 billion parameter LLM like GPT-3 may actually be over parameterized, they have more parameters than they need to achieve a good understanding of language and under trained so that they would benefit from seeing more trainig data.
+   - Smaller models may able to achieve the same performance as much larger ones if they are trained on larger datasets.
+   - The optimal training dataset size for a given model is about 20 times larger than the number of parameters in the model.
+   - The compute optimal ChinChilla model outperforms non compute optimal models such as GPT-3 on a large range of downstream evaluation tasks.
+![image](https://github.com/FionaYuY/Generative-AI-with-Large-Language-Models_notes/blob/72ad0368cabcb74cfe8017e00bad0b6667a0cee6/screenshots%20of%20lecture%20slides/0148.jpg)
+![image](https://github.com/FionaYuY/Generative-AI-with-Large-Language-Models_notes/blob/72ad0368cabcb74cfe8017e00bad0b6667a0cee6/screenshots%20of%20lecture%20slides/0149.jpg)
+8. With the results of the Chinchilla paper, teams have recently started to develop smaller modelsthat achieved similar, if not bettr results than larger models that were trained in a non-optimal way.
+9. Bloomberg GPT, is trained in a compute optimal way follwing the Chinchilla and so achieves good performance with the size of 50 billiona parameters.
+
+## Pre-training for domain adaption
+1. If your target domain uses vocabulary and language structures that are not commonly used in day to day language. You may need to perform domain adaption to achieve good model performance.
+2. Pretraining your model from scratch will result in better models for highly specilaized domains like laws, medicine, finance or science.
+3. BloombergGPT is a LLM that has been pretrained for a specific domain - finance.
+   - large Decoder-only language model
+   - Result: achieves Best-in-class results on financial benchmarks. Also maintaing competitve performance on general purpose LLM benchmarks.
+   - Data: 51% financial data  + 49% public data
+5. The following two graphs compare a number of LLMs to scaling laws that have been discussed.
+   - The number of parameters of BloombergGPT is fairly close to optimal.
+   - The actual number of tokens used to pretrain BloombergGPT is below the recommended Chinchilla value for the available compute budget.
+   - The smaller than optimal training dataset is due to limited availability financial domain data.
+![image](https://github.com/FionaYuY/Generative-AI-with-Large-Language-Models_notes/blob/56002b527db2444dbf44183c150fcd058bb3b105/screenshots%20of%20lecture%20slides/0156.jpg)
+![image](https://github.com/FionaYuY/Generative-AI-with-Large-Language-Models_notes/blob/786086a6f6bb540c410516d45b62d69f499e69ec/screenshots%20of%20lecture%20slides/BloombergGPT.png)
+
+
+
 
 
 
