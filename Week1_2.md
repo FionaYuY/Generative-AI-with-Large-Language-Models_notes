@@ -56,25 +56,25 @@
 4. Approximate GPU RAM needed to store 1B parameters
 ![image](https://github.com/FionaYuY/Generative-AI-with-Large-Language-Models_notes/blob/a3ecf15266bcb68af6f4984263598c576a27e34e/screenshots%20of%20lecture%20slides/0111.jpg)
 ![image](https://github.com/FionaYuY/Generative-AI-with-Large-Language-Models_notes/blob/81a4208e619e56ecb26fc2041073b35b0ec1054a/screenshots%20of%20lecture%20slides/%E8%9E%A2%E5%B9%95%E6%93%B7%E5%8F%96%E7%95%AB%E9%9D%A2%20(666).png)
-![image](https://github.com/FionaYuY/Generative-AI-with-Large-Language-Models_notes/blob/a3ecf15266bcb68af6f4984263598c576a27e34e/screenshots%20of%20lecture%20slides/0113.jpg)
+![image](https://github.com/FionaYuY/Generative-AI-with-Large-Language-Models_notes/blob/da9f2965a853248ab8f453aad528749b449b00d5/screenshots%20of%20lecture%20slides/0113.jpg)
 6. 'Qunatization'
    - one technique that you can use to reduce the memory.
    - you reduce the memory required to store the weights of your model by reducting their precision from 32-bit floating point numbers to 16-bit floating point numbers , or 8-bit integer numbers.
    - The corresponding data types are FP32 for 32-bit full position, FP16, or Bfloat16 for 160bit half precision, and int8
    - By default, model weights, activations, and other model parameters are stored in FP32
    - Quantization statistically projects the original FP32 into a lower precision space, using scaling factors calculated based on the range of the original FP32. 
-![image]((https://github.com/FionaYuY/Generative-AI-with-Large-Language-Models_notes/blob/a3ecf15266bcb68af6f4984263598c576a27e34e/screenshots%20of%20lecture%20slides/0114.jpg)
-![image](https://github.com/FionaYuY/Generative-AI-with-Large-Language-Models_notes/blob/a3ecf15266bcb68af6f4984263598c576a27e34e/screenshots%20of%20lecture%20slides/0115.jpg)
-![image]((https://github.com/FionaYuY/Generative-AI-with-Large-Language-Models_notes/blob/a3ecf15266bcb68af6f4984263598c576a27e34e/screenshots%20of%20lecture%20slides/0116.jpg)
-![image](https://github.com/FionaYuY/Generative-AI-with-Large-Language-Models_notes/blob/a3ecf15266bcb68af6f4984263598c576a27e34e/screenshots%20of%20lecture%20slides/0117.jpg)
+![image](https://github.com/FionaYuY/Generative-AI-with-Large-Language-Models_notes/blob/da9f2965a853248ab8f453aad528749b449b00d5/screenshots%20of%20lecture%20slides/0114.jpg)
+![image](https://github.com/FionaYuY/Generative-AI-with-Large-Language-Models_notes/blob/da9f2965a853248ab8f453aad528749b449b00d5/screenshots%20of%20lecture%20slides/0115.jpg)
+![image](https://github.com/FionaYuY/Generative-AI-with-Large-Language-Models_notes/blob/da9f2965a853248ab8f453aad528749b449b00d5/screenshots%20of%20lecture%20slides/0116.jpg)
+![image](https://github.com/FionaYuY/Generative-AI-with-Large-Language-Models_notes/blob/da9f2965a853248ab8f453aad528749b449b00d5/screenshots%20of%20lecture%20slides/0117.jpg)
    - Many LLMs, including flat-T5, have been pre-trained with BFloat16
    - BFloat16 is a hybrid between FP16 and FP32. BFloat16 is often described as a truncated 32-bit float, as it captures the full dynamic range of FP32, that uses only 16-bits. Not only save memory, but also increases model performance by speeding up calculations. However, BF16 is not well suited for integer calculations, but these are relatively rare in deep learning.
-![image](https://github.com/FionaYuY/Generative-AI-with-Large-Language-Models_notes/blob/a3ecf15266bcb68af6f4984263598c576a27e34e/screenshots%20of%20lecture%20slides/0118.jpg)
-![image](https://github.com/FionaYuY/Generative-AI-with-Large-Language-Models_notes/blob/a3ecf15266bcb68af6f4984263598c576a27e34e/screenshots%20of%20lecture%20slides/0119.jpg)
+![image](https://github.com/FionaYuY/Generative-AI-with-Large-Language-Models_notes/blob/da9f2965a853248ab8f453aad528749b449b00d5/screenshots%20of%20lecture%20slides/0118.jpg)
+![image](https://github.com/FionaYuY/Generative-AI-with-Large-Language-Models_notes/blob/da9f2965a853248ab8f453aad528749b449b00d5/screenshots%20of%20lecture%20slides/0119.jpg)
 9. Note in all this cases you still have a model with one billion parameters. As you can see, the circles representing the models are the same size. Quantization will give you the same degree of savings when it comes to training.
-![image](https://github.com/FionaYuY/Generative-AI-with-Large-Language-Models_notes/blob/a3ecf15266bcb68af6f4984263598c576a27e34e/screenshots%20of%20lecture%20slides/0120.jpg)
+![image](https://github.com/FionaYuY/Generative-AI-with-Large-Language-Models_notes/blob/da9f2965a853248ab8f453aad528749b449b00d5/screenshots%20of%20lecture%20slides/0120.jpg)
 10. As model scale beyond a few billion parameters, you need to turn to distributed computeing techniques while you train your model across multiple GPUs.
-![image](https://github.com/FionaYuY/Generative-AI-with-Large-Language-Models_notes/blob/a3ecf15266bcb68af6f4984263598c576a27e34e/screenshots%20of%20lecture%20slides/0122.jpg)
+![image](https://github.com/FionaYuY/Generative-AI-with-Large-Language-Models_notes/blob/da9f2965a853248ab8f453aad528749b449b00d5/screenshots%20of%20lecture%20slides/0122.jpg)
 
 
 
