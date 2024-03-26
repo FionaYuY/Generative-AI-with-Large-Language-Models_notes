@@ -50,7 +50,9 @@
    - A set of techniques that preserves the weights of the original LLM and trains only a small number of task-specific adapter layers and parameters
    - PEFT show greater robustness to catastrophic forgetting since most of the pre-trained weighs are left unchanged.
   
-
+## Multi-task instruction fine-tuning
+1. For multi-task fine-tuning, the training dataset is comprised of example inputs and outputs for multiple tasks.
+   - By training the model on the mixed dataset so that it can improve the performance of the model on all the tasks simultaneously thus avoiding the issue of catastrophic forgetting.
 
 
 
