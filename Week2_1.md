@@ -53,9 +53,22 @@
 ## Multi-task instruction fine-tuning
 1. For multi-task fine-tuning, the training dataset is comprised of example inputs and outputs for multiple tasks.
    - By training the model on the mixed dataset so that it can improve the performance of the model on all the tasks simultaneously thus avoiding the issue of catastrophic forgetting.
-
-
-
+2. One drawback to multitask fine-tuning is that it requires a lot of data (50~100,000 examples in your training set)
+3. Instruction fine-tuning with FLAN (Fine-tuned language net)
+   - a specific set of intstructins used to fine-tune different models
+   - 'The metaphorical dessert to the main course of pre-training'
+4. FLAN-T5
+   - the FLAN instruct version of the T5 foundation model
+   - a great, general purpose, intstruct model
+   - FLAN-T5 has been fine-tuned on 473 datasets across 146 task categories. Those datasets are chosen from other models and papaers as shown in the photo.
+![image](https://github.com/FionaYuY/Generative-AI-with-Large-Language-Models_notes/blob/e524d994d7c043331b413f0b3c47a481192de750/week2_screenshots/0036.jpg)
+5. FLAN-PALM
+   - the flattening struct version of the palm foundation model
+6. SAMSum is a dataset  with messenges like conversations with summaries
+   - The dialogues and summaries were crafted by linguists.
+   - The prompt templeate is actually comprised of several different instructions that all basically ask the model to do the same thing, summarize the dialogue.
+![image](https://github.com/FionaYuY/Generative-AI-with-Large-Language-Models_notes/blob/46c0abbd89fbd9a0bace5a422e5bac5734e17418/week2_screenshots/0039.jpg)
+7. Including different ways of saying the same instruction helps the model generalize and perform better.
 
 
 
