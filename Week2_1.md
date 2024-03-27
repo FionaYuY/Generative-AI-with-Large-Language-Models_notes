@@ -193,12 +193,36 @@ train only certain components of the model or specific layers, or even individua
 
 ## PEFT techniques 2: Soft prompts
 1. Additive methods within PEFT aim to improve model performance without changing the weights at all.
-2. Limitations for 'prompt engineering'
-   * It can require a lot of manual effort to write a
-4. With 'Prompt tuning', you work on the language of your prompt to get the completion you want.
-   - The goal is to help the model understand the nature of the task you're asking it to carry out and to generate a better completion.
-  
-
+2. With 'Prompt engineering', you work on the language of your prompt to get the completion you want.
+   - The goal is to help the model understand the nature of the task you're asking it to carry out and to generate a better completion
+   - Limitations for prompt engineering
+     * It can require a lot of manual effort to write and try different prompts.
+     * Limited by the length of the context window.
+3. With 'Prompt tuning', you add additional trainable tokens to your prompt and leave it up to the supervised learning process to determine their optimal values.
+   - The set of trainable tokens is called a soft prompt, and it gets prepended to embedding vectors that represent your input text.
+   - The soft prompt vectors have the same length as the embedding vectors of the language tokens. And including somewhere about 20 and 100 virtual tokens can be sufficient for good performance.
+![image](https://github.com/FionaYuY/Generative-AI-with-Large-Language-Models_notes/blob/2039fe847d07555b7580c3377bcb4c4abaad5e0b/week2_screenshots/0106.jpg)
+   - The tokens that represent natural language are hard in the sense that they each correspond to a fixed location in the embedding vector space.
+![image](https://github.com/FionaYuY/Generative-AI-with-Large-Language-Models_notes/blob/2039fe847d07555b7580c3377bcb4c4abaad5e0b/week2_screenshots/0107.jpg)
+   - However, the soft prompts are not fixed discrete words of natural language. Instead, you can think of them as virtual tokens that can take on any value within the continuous multidimensional embedding space. And through supervised learning, the model learns the values for these virtual tokens that maximize performance for a given task.
+![image](https://github.com/FionaYuY/Generative-AI-with-Large-Language-Models_notes/blob/2039fe847d07555b7580c3377bcb4c4abaad5e0b/week2_screenshots/0108.jpg)
+   - In 'full fine tuning', the training data set consists of input prompts and output completions or labels. The weights of the large language model are updated during supervised learning.
+   - In contrast with prompt tuning, the weights of the large language model are frozen and the underlying model does not get updated. Instead, the embedding vectors of the soft prompt gets updated over time to optimize the model's completion of the prompt.
+   - Prompt tuning is a very parameter efficient strategy because only a few parameters are being trained. In contrast with the millions to billions of parameters in full fine tuning.
+![image](https://github.com/FionaYuY/Generative-AI-with-Large-Language-Models_notes/blob/2039fe847d07555b7580c3377bcb4c4abaad5e0b/week2_screenshots/0110.jpg)
+   - You can train a different set of soft prompts for each task and then easily swap them out at inference time. You can train a set of soft prompts for one task and a different set for another. To use them for inference, you prepend your input prompt with the learned tokens to switch to another task, you simply change the soft prompt. Soft prompts are very small on disk, so this kind of fine tuning is extremely efficient and flexible. You'll notice the same LLM is used for all tasks, all you have to do is switch out the soft prompts at inference time.
+![image](https://github.com/FionaYuY/Generative-AI-with-Large-Language-Models_notes/blob/2039fe847d07555b7580c3377bcb4c4abaad5e0b/week2_screenshots/0111.jpg)
+4. how well does prompt tuning perform?
+![image](https://github.com/FionaYuY/Generative-AI-with-Large-Language-Models_notes/blob/2039fe847d07555b7580c3377bcb4c4abaad5e0b/week2_screenshots/0112.jpg)
+   - The authors compared prompt tuning to several other methods for a range of model sizes.
+   - As you can see, prompt tuning doesn't perform as well as full fine tuning for smaller LLMs. However, as the model size increases, so does the performance of prompt tuning. And once models have around 10 billion parameters, prompt tuning can be as effective as full fine tuning and offers a significant boost in performance over prompt engineering alone.
+5. One potential issue to consider is the interpretability of learned virtual tokens.
+   - Because the soft prompt tokens can take any value within the continuous embedding vector space, the trained tokens don't correspond to any known token, word, or phrase in the vocabulary of the LLM.
+![image](https://github.com/FionaYuY/Generative-AI-with-Large-Language-Models_notes/blob/2039fe847d07555b7580c3377bcb4c4abaad5e0b/week2_screenshots/0113.jpg)
+   - However, an analysis of the nearest neighbor tokens to the soft prompt location shows that they form tight semantic clusters.-> The words closest to the soft prompt tokens have similar meanings. The words identified usually have some meaning related to the task, suggesting that the prompts are learning word like representations.
+![image](https://github.com/FionaYuY/Generative-AI-with-Large-Language-Models_notes/blob/2039fe847d07555b7580c3377bcb4c4abaad5e0b/week2_screenshots/0114.jpg)
+6. PEFT methods summary
+![image](https://github.com/FionaYuY/Generative-AI-with-Large-Language-Models_notes/blob/2039fe847d07555b7580c3377bcb4c4abaad5e0b/week2_screenshots/0115.jpg)
 
 
 
