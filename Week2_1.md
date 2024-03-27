@@ -190,4 +190,24 @@ train only certain components of the model or specific layers, or even individua
    - In the paper that first proposed LoRA, you can see the results of different rank. (The bold values indicate the best scores that were achieved for each metric)
    - The authors found a plateau in the loss value for ranks greater than 16. -> Using larger LoRA matrices didn't improve performance -> 4~32 can provide a good trade-off between reducing trainable parameters and preserving performance.
 ![image](https://github.com/FionaYuY/Generative-AI-with-Large-Language-Models_notes/blob/2039fe847d07555b7580c3377bcb4c4abaad5e0b/week2_screenshots/0102.jpg)
-9. 
+
+## PEFT techniques 2: Soft prompts
+1. Additive methods within PEFT aim to improve model performance without changing the weights at all.
+2. Limitations for 'prompt engineering'
+   * It can require a lot of manual effort to write a
+4. With 'Prompt tuning', you work on the language of your prompt to get the completion you want.
+   - The goal is to help the model understand the nature of the task you're asking it to carry out and to generate a better completion.
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
