@@ -134,3 +134,60 @@
     - The benchmark also includes metrics for fairness, bias, and toxicity, which are becoming increasingly important to assess as LLMs become more capable of human-like language generation, and in turn of exhibiting potentially harmful behavior.
     - HELM is a living benchmark that aims to continuously evolve with the addition of new scenarios, metrics, and models
 
+## Parameter efficient fine-tuning (PEFT)
+1. Full fine-tuning requires memory not just to store the model, but various other parameters that are required during the training process.
+2. PEFT method only update a small subset of parameters
+   - Some PEFT techniques freeze most of the model weights and focus on fine tuning a subset of existing model parameters. Other techniques don't touch the original model weights at all, and instead add a small number of new parameters or layers and fine-tune only the new components.
+   - So, the number of trained parameters is much smaller than the number of parameters in the original LLM (sometimes 15%~20% of the original LLM weights)
+   - PEFT can often be performed on a single GPU
+   - Since the original LLM is only slightly modified, PEFT is less prone to catastrophic forgetting problems like full fine-tuning.
+3. Full fine-tuning results in a new version of the model for every task you train on. Each of these is the same size as the original model, so it can create an expensive storage problem if you're fine-tuning for multiple tasks.
+![image](https://github.com/FionaYuY/Generative-AI-with-Large-Language-Models_notes/blob/e21aee417db84221b4b3921a9f6ec3ee53196a0d/week2_screenshots/0084.jpg)
+4. With parameter efficient fine-tuning, you train only a small number of weights, which results in a much smaller footprint overall. The new parameters are combined with the original LLM weights for inference. The PEFT weights are trained for each task and can be easily swapped out for inference, allowing efficient adaptation of the original model to multiple tasks.
+![image](https://github.com/FionaYuY/Generative-AI-with-Large-Language-Models_notes/blob/e21aee417db84221b4b3921a9f6ec3ee53196a0d/week2_screenshots/0085.jpg)
+5. There are several methods you can use for parameter efficient fine-tuning, each with trade-offs on parameter efficiency, memory efficiency, training speed, model quality, and inference costs.
+![image](https://github.com/FionaYuY/Generative-AI-with-Large-Language-Models_notes/blob/e21aee417db84221b4b3921a9f6ec3ee53196a0d/week2_screenshots/0086.jpg)
+6. Three main classes of PEFT methods
+   - Selective methods
+     * Fine-tune only a subset of the original LLM parameters
+     * There are several approaches that you can take to identify which parameters you want to update. You can
+train only certain components of the model or specific layers, or even individual parameter types. Researchers have found that the performance of these methods is mixed and there are significant trade-offs between parameter efficiency and compute efficiency. 
+   - Reparameterization methods
+     * also work with the original LLM parameters, but reduce the number of parameters to train by creating new low rank transformations of the original network weights.
+     * ex: LoRA. 
+   - Additive methods
+     * keeping all of the original LLM weights frozen and introducing new trainable components.
+     * Two main approaches
+       + Adapter methods add new trainable layers to the architecture of the model, typically inside the encoder or decoder components after the attention or feed-forward layers.
+       + Soft prompt methods, on the other hand, keep the model architecture fixed and frozen, and focus on manipulating the input to achieve better performance. This can be done by adding trainable parameters to the prompt embeddings or keeping the input fixed and retraining the embedding weights. ex: prompt tuning
+![image](https://github.com/FionaYuY/Generative-AI-with-Large-Language-Models_notes/blob/e21aee417db84221b4b3921a9f6ec3ee53196a0d/week2_screenshots/0088.jpg)
+
+## PEFT techniques 1: LoRA
+1. A small recap of transformer architecture
+   - The input prompt is turned into tokens, which are then converted to embedding vectors and passed into the encoder and/or decoder parts of the transformer.
+   - In both of these components, there are two kinds of neural networks; self-attention and feedforward networks.
+   - The weights of these networks are learned during pre-training.
+   - After the embedding vectors are created, they're fed into the self-attention layers where a series of weights are applied to calculate the attention scores.
+   - During full fine-tuning, every parameter in these layers is updated.
+3. LoRA (Low-rank Adaptation)
+   - is a parameter-efficient fine-tuning technique of the reparameterization category. 
+   - Fine-tuning by freezing all of the original model parameters and then injecting a pair of rank decomposition matrices alongside the original weights.
+   - The dimensions of the smaller matrices are set so that their product is a matrix with the same dimensions as the weights they're modifying.
+   - You then keep the original weights of the LLM frozen and train the smaller matrices using the same supervised learning process.
+   - For inference, the two low-rank matrices are multiplied together to create a matrix with the same dimensions as the frozen weights. You then add this to the original weights and replace them in the model with these updated values.
+   - You now have a LoRA fine-tuned model that can carry out your specific task. Because this model has the same number of parameters as the original, there is little to no impact on inference latency.
+   - Researchers have found that applying LoRA to just the self-attention layers of the model is often enough to fine-tune for a task and achieve performance gains. However, in principle, you can also use LoRA on other components like the feed-forward layers. But since most of the parameters of LLMs are in the attention layers, you get the biggest savings in trainable parameters by applying LoRA to these weights matrices.
+![image](https://github.com/FionaYuY/Generative-AI-with-Large-Language-Models_notes/blob/278aeb51beac08ca457d59e703b5448ddc9c65e6/week2_screenshots/0094.jpg)
+4. You can often perform LoRA with a single GPU and avoid the need for a distribute cluster of GPUs.
+5. Since the rank-decomposition matrices are small, you can fine-tune a different set for each task and then switch them out at inference time by updating the weights. The memory required to store these LoRA matrices is very small. So, you can use LoRA to train for many tasks.
+![image](https://github.com/FionaYuY/Generative-AI-with-Large-Language-Models_notes/blob/8bee1fca3a20fdcb9762307abc03d07b6acc5850/week2_screenshots/0098.jpg)
+6. The ROUGE metrics for full vs. LoRA fine-tuning
+   - Although FLAN-T5 is a capable model, it can still benefit from additional fine-tuning on specific tasks.
+   - The ROUGE1 score of LoRA fine-tuned model is a little lower than full fine-tuning. However, using LoRA for fine-tuning trained a much smaller number of parameters than full fine-tuning using significantly less compute, so the small trade-off in performance may be worth it.
+![image](https://github.com/FionaYuY/Generative-AI-with-Large-Language-Models_notes/blob/001b41bfc3b2b3ab21b61aba8c0af4e64b2320e9/week2_screenshots/0101.jpg)
+7. How to choose the rank of the LoRA matrices
+   - the smaller the rank, the smaller the number of trainable parameters, and the bigger the savings on compute. However, there are some issues related to model performance to consider.
+   - In the paper that first proposed LoRA, you can see the results of different rank. (The bold values indicate the best scores that were achieved for each metric)
+   - The authors found a plateau in the loss value for ranks greater than 16. -> Using larger LoRA matrices didn't improve performance -> 4~32 can provide a good trade-off between reducing trainable parameters and preserving performance.
+![image](https://github.com/FionaYuY/Generative-AI-with-Large-Language-Models_notes/blob/2039fe847d07555b7580c3377bcb4c4abaad5e0b/week2_screenshots/0102.jpg)
+9. 
