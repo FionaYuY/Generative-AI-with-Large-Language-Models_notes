@@ -70,7 +70,16 @@
 ![image](https://github.com/FionaYuY/Generative-AI-with-Large-Language-Models_notes/blob/46c0abbd89fbd9a0bace5a422e5bac5734e17418/week2_screenshots/0039.jpg)
 7. Including different ways of saying the same instruction helps the model generalize and perform better.
 
+## Scaling instruct models
+1.  The paper 'Scaling Instruction-Finetuned Language Models' demonstrates that by fine-tuning the 540B PaLM model on 1836 tasks while incorporating Chain-of-Thought Reasoning data, FLAN achieves improvements in generalization, human usability, and zero-shot reasoning over the base model. The paper also provides detailed information on how each these aspects was evaluated.
+![image](https://github.com/FionaYuY/Generative-AI-with-Large-Language-Models_notes/blob/d525cf640531634cd04a0a418f0e879a842b19b1/week2_screenshots/FLAN.png)
 
-
+## Model Evaluation
+1. LLM Evaluation - Challenges
+   - In traditional machine learning, you can assess how well a model is doing by looking at its performance on training and validation datasets where the output is already known. The models are deterministic. Accuracy = Correct Predictions / Total Predictions
+   - For LLM where the output is non-deterministic and language-based evaluation is much more challenging.
+2. ROUGE and BLEU are two widely used evaluation metrics for different tasks
+3. ROUGE (Recall-Oriented Understudy for Gisting Evaluation)
+   - 
 
 
