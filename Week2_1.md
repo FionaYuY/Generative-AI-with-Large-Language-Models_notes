@@ -104,12 +104,12 @@
 ![image](https://github.com/FionaYuY/Generative-AI-with-Large-Language-Models_notes/blob/f326685ae806086cb3105715d7ed40ac31f36e1a/week2_screenshots/0061.jpg)
    - You can only use the scores to compare the capabilities of models if the score were determined for the same task.
    - A particular problem with simple rouge scores is that it's possible for a bad completion to result in a good score. For example, in the next photo. One way you can counter the issue is by using a clipping function to limit the number of unigram matches to the maximum count for that unigram within the reference. However, you might still be challenged if their generated words are all present, but just in a different order. So, using a different rouge score can help experimenting with an n-gram size that will calculate the most useful score will be dependent on the sentence, the sentence size, and your use case.
-![image](https://github.com/FionaYuY/Generative-AI-with-Large-Language-Models_notes/blob/f326685ae806086cb3105715d7ed40ac31f36e1a/week2_screenshots/0063.jpg)
+![image](https://github.com/FionaYuY/Generative-AI-with-Large-Language-Models_notes/blob/2039fe847d07555b7580c3377bcb4c4abaad5e0b/week2_screenshots/0063.jpg)
 7. BLEU score
    - useful for evaluating the quality of machine-translated text
    - The score itself is calculated using the average precision over multiple n-gram sizes
    - quantifies the quality of a translation by checking how many n-grams in the machine-generated translation match those in the reference translation.
-![image](https://github.com/FionaYuY/Generative-AI-with-Large-Language-Models_notes/blob/f326685ae806086cb3105715d7ed40ac31f36e1a/week2_screenshots/0065.jpg)
+![image](https://github.com/FionaYuY/Generative-AI-with-Large-Language-Models_notes/blob/2039fe847d07555b7580c3377bcb4c4abaad5e0b/week2_screenshots/0065.jpg)
 8. Both rouge and BLEU are quite simple metrics and are relatively low-cost to calculate. Use them for simple reference as you iterate over your models, but you shouldn't use them alone to report the final evaluation. For overall evaluation of your model's performance, you will need to look at one of the evaluation benchmarks.
 
 ## Benchmarks 
@@ -146,7 +146,8 @@
 4. With parameter efficient fine-tuning, you train only a small number of weights, which results in a much smaller footprint overall. The new parameters are combined with the original LLM weights for inference. The PEFT weights are trained for each task and can be easily swapped out for inference, allowing efficient adaptation of the original model to multiple tasks.
 ![image](https://github.com/FionaYuY/Generative-AI-with-Large-Language-Models_notes/blob/e21aee417db84221b4b3921a9f6ec3ee53196a0d/week2_screenshots/0085.jpg)
 5. There are several methods you can use for parameter efficient fine-tuning, each with trade-offs on parameter efficiency, memory efficiency, training speed, model quality, and inference costs.
-![image](https://github.com/FionaYuY/Generative-AI-with-Large-Language-Models_notes/blob/e21aee417db84221b4b3921a9f6ec3ee53196a0d/week2_screenshots/0086.jpg)
+![image]![image](https://github.com/FionaYuY/Generative-AI-with-Large-Language-Models_notes/blob/2039fe847d07555b7580c3377bcb4c4abaad5e0b/week2_screenshots/0086.jpg)
+)
 6. Three main classes of PEFT methods
    - Selective methods
      * Fine-tune only a subset of the original LLM parameters
@@ -160,7 +161,7 @@ train only certain components of the model or specific layers, or even individua
      * Two main approaches
        + Adapter methods add new trainable layers to the architecture of the model, typically inside the encoder or decoder components after the attention or feed-forward layers.
        + Soft prompt methods, on the other hand, keep the model architecture fixed and frozen, and focus on manipulating the input to achieve better performance. This can be done by adding trainable parameters to the prompt embeddings or keeping the input fixed and retraining the embedding weights. ex: prompt tuning
-![image](https://github.com/FionaYuY/Generative-AI-with-Large-Language-Models_notes/blob/e21aee417db84221b4b3921a9f6ec3ee53196a0d/week2_screenshots/0088.jpg)
+![image](https://github.com/FionaYuY/Generative-AI-with-Large-Language-Models_notes/blob/2039fe847d07555b7580c3377bcb4c4abaad5e0b/week2_screenshots/0088.jpg)
 
 ## PEFT techniques 1: LoRA
 1. A small recap of transformer architecture
@@ -201,28 +202,30 @@ train only certain components of the model or specific layers, or even individua
 3. With 'Prompt tuning', you add additional trainable tokens to your prompt and leave it up to the supervised learning process to determine their optimal values.
    - The set of trainable tokens is called a soft prompt, and it gets prepended to embedding vectors that represent your input text.
    - The soft prompt vectors have the same length as the embedding vectors of the language tokens. And including somewhere about 20 and 100 virtual tokens can be sufficient for good performance.
-![image](https://github.com/FionaYuY/Generative-AI-with-Large-Language-Models_notes/blob/2039fe847d07555b7580c3377bcb4c4abaad5e0b/week2_screenshots/0106.jpg)
+![image](https://github.com/FionaYuY/Generative-AI-with-Large-Language-Models_notes/blob/e58282bf4d5c95c941cc19ff2bdae19384461bd7/week2_screenshots/0106.jpg)
    - The tokens that represent natural language are hard in the sense that they each correspond to a fixed location in the embedding vector space.
-![image](https://github.com/FionaYuY/Generative-AI-with-Large-Language-Models_notes/blob/2039fe847d07555b7580c3377bcb4c4abaad5e0b/week2_screenshots/0107.jpg)
+![image](https://github.com/FionaYuY/Generative-AI-with-Large-Language-Models_notes/blob/e58282bf4d5c95c941cc19ff2bdae19384461bd7/week2_screenshots/0107.jpg)
    - However, the soft prompts are not fixed discrete words of natural language. Instead, you can think of them as virtual tokens that can take on any value within the continuous multidimensional embedding space. And through supervised learning, the model learns the values for these virtual tokens that maximize performance for a given task.
-![image](https://github.com/FionaYuY/Generative-AI-with-Large-Language-Models_notes/blob/2039fe847d07555b7580c3377bcb4c4abaad5e0b/week2_screenshots/0108.jpg)
+![image](https://github.com/FionaYuY/Generative-AI-with-Large-Language-Models_notes/blob/e58282bf4d5c95c941cc19ff2bdae19384461bd7/week2_screenshots/0108.jpg)
    - In 'full fine tuning', the training data set consists of input prompts and output completions or labels. The weights of the large language model are updated during supervised learning.
    - In contrast with prompt tuning, the weights of the large language model are frozen and the underlying model does not get updated. Instead, the embedding vectors of the soft prompt gets updated over time to optimize the model's completion of the prompt.
    - Prompt tuning is a very parameter efficient strategy because only a few parameters are being trained. In contrast with the millions to billions of parameters in full fine tuning.
-![image](https://github.com/FionaYuY/Generative-AI-with-Large-Language-Models_notes/blob/2039fe847d07555b7580c3377bcb4c4abaad5e0b/week2_screenshots/0110.jpg)
+![image](https://github.com/FionaYuY/Generative-AI-with-Large-Language-Models_notes/blob/e58282bf4d5c95c941cc19ff2bdae19384461bd7/week2_screenshots/0108.jpg)
    - You can train a different set of soft prompts for each task and then easily swap them out at inference time. You can train a set of soft prompts for one task and a different set for another. To use them for inference, you prepend your input prompt with the learned tokens to switch to another task, you simply change the soft prompt. Soft prompts are very small on disk, so this kind of fine tuning is extremely efficient and flexible. You'll notice the same LLM is used for all tasks, all you have to do is switch out the soft prompts at inference time.
-![image](https://github.com/FionaYuY/Generative-AI-with-Large-Language-Models_notes/blob/2039fe847d07555b7580c3377bcb4c4abaad5e0b/week2_screenshots/0111.jpg)
+![image](https://github.com/FionaYuY/Generative-AI-with-Large-Language-Models_notes/blob/e58282bf4d5c95c941cc19ff2bdae19384461bd7/week2_screenshots/0110.jpg)
+![image](https://github.com/FionaYuY/Generative-AI-with-Large-Language-Models_notes/blob/e58282bf4d5c95c941cc19ff2bdae19384461bd7/week2_screenshots/0111.jpg)
 4. how well does prompt tuning perform?
-![image](https://github.com/FionaYuY/Generative-AI-with-Large-Language-Models_notes/blob/2039fe847d07555b7580c3377bcb4c4abaad5e0b/week2_screenshots/0112.jpg)
+![image](https://github.com/FionaYuY/Generative-AI-with-Large-Language-Models_notes/blob/e58282bf4d5c95c941cc19ff2bdae19384461bd7/week2_screenshots/0112.jpg)
    - The authors compared prompt tuning to several other methods for a range of model sizes.
    - As you can see, prompt tuning doesn't perform as well as full fine tuning for smaller LLMs. However, as the model size increases, so does the performance of prompt tuning. And once models have around 10 billion parameters, prompt tuning can be as effective as full fine tuning and offers a significant boost in performance over prompt engineering alone.
 5. One potential issue to consider is the interpretability of learned virtual tokens.
    - Because the soft prompt tokens can take any value within the continuous embedding vector space, the trained tokens don't correspond to any known token, word, or phrase in the vocabulary of the LLM.
-![image](https://github.com/FionaYuY/Generative-AI-with-Large-Language-Models_notes/blob/2039fe847d07555b7580c3377bcb4c4abaad5e0b/week2_screenshots/0113.jpg)
+![image](https://github.com/FionaYuY/Generative-AI-with-Large-Language-Models_notes/blob/e58282bf4d5c95c941cc19ff2bdae19384461bd7/week2_screenshots/0113.jpg)
    - However, an analysis of the nearest neighbor tokens to the soft prompt location shows that they form tight semantic clusters.-> The words closest to the soft prompt tokens have similar meanings. The words identified usually have some meaning related to the task, suggesting that the prompts are learning word like representations.
-![image](https://github.com/FionaYuY/Generative-AI-with-Large-Language-Models_notes/blob/2039fe847d07555b7580c3377bcb4c4abaad5e0b/week2_screenshots/0114.jpg)
+![image](https://github.com/FionaYuY/Generative-AI-with-Large-Language-Models_notes/blob/e58282bf4d5c95c941cc19ff2bdae19384461bd7/week2_screenshots/0114.jpg)
 6. PEFT methods summary
-![image](https://github.com/FionaYuY/Generative-AI-with-Large-Language-Models_notes/blob/2039fe847d07555b7580c3377bcb4c4abaad5e0b/week2_screenshots/0115.jpg)
+![image](https://github.com/FionaYuY/Generative-AI-with-Large-Language-Models_notes/blob/e58282bf4d5c95c941cc19ff2bdae19384461bd7/week2_screenshots/0115.jpg)
+
 
 
 
