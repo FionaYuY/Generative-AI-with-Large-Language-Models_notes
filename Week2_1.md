@@ -80,6 +80,57 @@
    - For LLM where the output is non-deterministic and language-based evaluation is much more challenging.
 2. ROUGE and BLEU are two widely used evaluation metrics for different tasks
 3. ROUGE (Recall-Oriented Understudy for Gisting Evaluation)
-   - 
+   - ROUGE is primarily employed to assess the quality of automatically generated summaries by comparing them to human-generated reference summaries.
+4. BLEU (Bilingual Evaluation Understudy)
+   - is an algorithm designed to evaluate the qulaity of machine-translated text by comparing it to human-generated translations.
+![image](https://github.com/FionaYuY/Generative-AI-with-Large-Language-Models_notes/blob/612fb4cbbe8106a33f15bc78d444d6e8946d2ca8/week2_screenshots/0053.jpg)
+5. Some terminology
+   - Unigram: single word
+   - Bigram: two words
+   - n-gram: a group of n-words
+6. ROUGE-1
+   - The recall metric measures the number of words or unigrams that are matched between the refernce and the generated output divided by the number of words or unigrams in the reference.
+   - precision measures the unigram matches divided by the output size.
+   - F1 score is the n=harmonic mean of both recall and precision.
+   - Very basic metrics that only focused on individual words, and don't consider the ordering of the words. -> It can be deceptive. It's easily possible to generate sentences that score well bur would be subjectively poor.
+![image](https://github.com/FionaYuY/Generative-AI-with-Large-Language-Models_notes/blob/4fa1dd86ad50a603d4eaaee8ad695f2bb98b3546/week2_screenshots/0055.jpg)
+![image](https://github.com/FionaYuY/Generative-AI-with-Large-Language-Models_notes/blob/4fa1dd86ad50a603d4eaaee8ad695f2bb98b3546/week2_screenshots/0056.jpg)
+   - You can get a slightly better score by taking into account bigrams at at time from the reference and generated sentence. -> you can consider the order of the words
+   - By using bigrams, you can calculate ROUGE-2.
+![image](https://github.com/FionaYuY/Generative-AI-with-Large-Language-Models_notes/blob/056f5d4882baaae017999b77619a516e302b26ef/week2_screenshots/0058.jpg)
+   - With longer sentences, they're greater chance that bigrams don't match.
+   - You can look for the longest common subsequence present in both the generated output and the reference output.
+![image](https://github.com/FionaYuY/Generative-AI-with-Large-Language-Models_notes/blob/f326685ae806086cb3105715d7ed40ac31f36e1a/week2_screenshots/0059.jpg)
+![image](https://github.com/FionaYuY/Generative-AI-with-Large-Language-Models_notes/blob/f326685ae806086cb3105715d7ed40ac31f36e1a/week2_screenshots/0061.jpg)
+   - You can only use the scores to compare the capabilities of models if the score were determined for the same task.
+   - A particular problem with simple rouge scores is that it's possible for a bad completion to result in a good score. For example, in the next photo. One way you can counter the issue is by using a clipping function to limit the number of unigram matches to the maximum count for that unigram within the reference. However, you might still be challenged if their generated words are all present, but just in a different order. So, using a different rouge score can help experimenting with an n-gram size that will calculate the most useful score will be dependent on the sentence, the sentence size, and your use case.
+![image](https://github.com/FionaYuY/Generative-AI-with-Large-Language-Models_notes/blob/f326685ae806086cb3105715d7ed40ac31f36e1a/week2_screenshots/0063.jpg)
+7. BLEU score
+   - useful for evaluating the quality of machine-translated text
+   - The score itself is calculated using the average precision over multiple n-gram sizes
+   - quantifies the quality of a translation by checking how many n-grams in the machine-generated translation match those in the reference translation.
+![image](https://github.com/FionaYuY/Generative-AI-with-Large-Language-Models_notes/blob/f326685ae806086cb3105715d7ed40ac31f36e1a/week2_screenshots/0065.jpg)
+8. Both rouge and BLEU are quite simple metrics and are relatively low-cost to calculate. Use them for simple reference as you iterate over your models, but you shouldn't use them alone to report the final evaluation. For overall evaluation of your model's performance, you will need to look at one of the evaluation benchmarks.
 
+## Benchmarks 
+1. Selecting the right evaluation dataset is important. And you should consider whether the model has seen your evaluation data during training.
+2. Bechmarks, such as GLUE, SuperGLUE, or Helm, cover a wide range of tasks and scenarios.
+3. GLUE (General Language Understanding Evaluation)
+   - is a collection of natural language tasks (including sentiment analysis and question answering...)
+4. SuperGLUE
+   - a successor to GLUE
+   - consists of a series of tasks such as multi-sentence reasoning, reading comprehension.
+5. Both GLUE and SuperGLUE have leaderboards that can be used to compare and contrast evaluated models.
+6. As models get larger, their performance on benchmarks start to match human ability on specific tasks. But there are not performing at human level at tasks in general. -> There is an arms racebetween the emergent properties of LLMs, and the benchmarks that aim to measure them.
+7. MMLU (Massive Multitask Language Understanding) is designed for modern LLMs.
+   - Models are tested on elementary mathematics, US history, computer science, law, and more -> tasks that extend way beyond basic language understanding
+8. BIG-bench
+   -consists of 204 tasks, ranging through linguistics, childhood development, math, common sense reasoning, biology, physics, social bias, software development and more.
+   - BIG-bench comes in three different sizes, and part of the reason for this is to keep costs achievable, as running these large benchmarks can incur large inference costs.
+9. HELM (Holistic Evaluation of Language Models)
+    - Aims to improve the transparency of models, and to offer guidance on which models perform well for specific tasks.
+    - HELM takes a multimetric approach, measuring seven metrics across 16 core scenarios, ensuring that trade-offs between models and metrics are clearly exposed.
+    - One important feature of HELM is that it assesses on metrics beyond basic accuracy measures, like precision of the F1 score.
+    - The benchmark also includes metrics for fairness, bias, and toxicity, which are becoming increasingly important to assess as LLMs become more capable of human-like language generation, and in turn of exhibiting potentially harmful behavior.
+    - HELM is a living benchmark that aims to continuously evolve with the addition of new scenarios, metrics, and models
 
