@@ -82,6 +82,9 @@
    - The following photo is an example set of instructions written for human labelers. This would be presented to the labeler to read before beginning the task and made available to refer back to as they work through the dataset.
    - The more detailed you make these instructions, the higher the likelihood that the labelers will understand the task they have to carry out and complete it exactly as you wish
 ![image](https://github.com/FionaYuY/Generative-AI-with-Large-Language-Models_notes/blob/3ad2b1b55fd3903d84c73f1a849789ddd8841afe/Week3_screenshots/0018.jpg)
-
-
+4. Once your human labelers have completed their assessments off the Prom completion sets, you have all the data you need to train the reward model. Which you will use instead of humans to classify model completions during the reinforcement learning finetuning process. Before you start to train the reward model, however, you need to convert the ranking data into a pairwise comparison of completions.
+   - In other words, all possible 'pairs of completions' from the available choices to a prompt should be classified as 0 or 1 score.
+   - For each pair, you will assign a reward of 1 for the preferred response and a reward of 0 for the less preferred response.
+   - Then you'll reorder the prompts so that the preferred option comes first. This is an important step because the reward model expects the preferred completion, which is referred to as Yj first.
+   - Note that while thumbs-up, thumbs-down feedback is often easier to gather than ranking feedback, ranked feedback gives you more prompt completion data (you will have N choose two combinations) to train your reward model. 
 
