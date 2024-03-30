@@ -88,3 +88,24 @@
    - Then you'll reorder the prompts so that the preferred option comes first. This is an important step because the reward model expects the preferred completion, which is referred to as Yj first.
    - Note that while thumbs-up, thumbs-down feedback is often easier to gather than ranking feedback, ranked feedback gives you more prompt completion data (you will have N choose two combinations) to train your reward model. 
 
+## RLHF: Reward model
+1. The reward model will effectively take place off the human labeler and automatically choose the preferred completion during the RLHF process.
+   - THe reward model is usually also a language model.
+   - For a given prompt X, the reward model learns to favor the human-preferred completion y_ j, while minimizing the log sigmoid off the reward difference, r_j-r_k.
+![image](https://github.com/FionaYuY/Generative-AI-with-Large-Language-Models_notes/blob/b40ecfe7fc44353b7d3109bd0411f1b08cd9cc14/Week3_screenshots/0021.jpg)
+2. Once the model has been trained on the human rank prompt-completion pairs, you can use the reward model as a binary classifier to provide a set of logics across the positive and negative classes.
+   - Logics are the unnormalized model outputs before applying any activation function. Let's say you want to detoxify your LLM, and the reward model needs to identify if the completion contains hate speech.
+   - Let's say you want to detoxify your LLM, and the reward model needs to identify if the completion contains hate speech. In this case, the two classes would be notate, the positive class that you ultimately want to optimize for and hate the negative class you want to avoid.
+   - The largest value of the positive class is what you use as the reward value in LLHF. Just to remind you, if you apply a Softmax function to the logits, you will get the probabilities. The first example shows a good reward for non-toxic completion and the second example shows a bad reward being given for toxic completion. 
+![image](https://github.com/FionaYuY/Generative-AI-with-Large-Language-Models_notes/blob/b40ecfe7fc44353b7d3109bd0411f1b08cd9cc14/Week3_screenshots/0023.jpg)
+
+## RLHF: Fine-tuning with reinforcement learning
+
+
+
+
+
+
+
+
+
