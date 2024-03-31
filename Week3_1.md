@@ -118,11 +118,33 @@
 ![image](https://github.com/FionaYuY/Generative-AI-with-Large-Language-Models_notes/blob/d40df2b4c39ff26184e22b7128bcd6c7732072a2/Week3_screenshots/0031.jpg)
 2. You will continue the iterative process until your model is aligned based on some evaluation criteria.
    - for example, reaching a threshold value for the helpfulness you defined. You can also define a maximum number of steps, for example, 20,000 as the stopping criteria.
+3. The 'RL algorithm' shown in the photo is the algorithm that takes the output of teh reward model and uses it to update the LLM model weights so that the reward score increases over time.
+   - There are several different algorithms that you can use for this part of the RLHF process
+   - A popular choice is 'proximal policy optimization' (PPO)
 
-
-
-
-
+## Optional video: Proximal policy optimization
+1. PPO (Proximal policy optimization)
+   - a powerful algorithm for solving reinforcement learning problems
+   - PPO optimizes a policy, in this case the LLM, to be more aligned with human preferences.
+   - Over many iterations, PPO makes updates to LLM. The updates are small and within a bounded region, resulting in an updated LLM that is close to the previous version, hence the name Proximal Policy Optimization. Keeping the changes within this small region result in a more stable learning.
+2. PPO's goal is to update the policy so that the reward is maximized. How this works in the specific context of LLM?
+   - Start PPO with your initial instruct LLM, then at a high level, each cycle of PPO goes over two phases.
+3. Phase I
+   - In Phase I, the LLM, is used to carry out a number of experiments, completing the given prompts. These experiments allow you to update the LLM against the reward model in Phase II, remember that the reward model captures the human preferences. For example, the reward can define how helpful, harmless, and honest the responses are. The expected reward of a completion is an important quantity used in the PPO objective.
+![image](https://github.com/FionaYuY/Generative-AI-with-Large-Language-Models_notes/blob/81df39a11da3ef7bc2f21104d0a0be10be635132/Week3_screenshots/0035.jpg)
+   - We estimate this quantity through a separate head of the LLM called the value function. Let's have a closer look at the value function and the value loss. Assume a number of prompts are given. First, you generate the LLM responses to the prompts, then you calculate the reward for the prompt completions using the reward model.
+   - For example, the first prompt completion shown in the photo might receive a reward of 1.87. The next one might receive a reward of -1.24, and so on. You have a set of prompt completions and their corresponding rewards.
+![image](https://github.com/FionaYuY/Generative-AI-with-Large-Language-Models_notes/blob/81df39a11da3ef7bc2f21104d0a0be10be635132/Week3_screenshots/0036.jpg)
+   - The value function estimates the expected total reward for a given State S. In other words, as the LLM generates each token of a completion, you want to estimate the total future reward based on the current sequence of tokens.
+![image](https://github.com/FionaYuY/Generative-AI-with-Large-Language-Models_notes/blob/81df39a11da3ef7bc2f21104d0a0be10be635132/Week3_screenshots/0037.jpg)
+   - You can think of this as a baseline to evaluate the quality of completions against your alignment criteria. Let's say that at this step of completion, the estimated future total reward is 0.34. With the next generated token, the estimated future total reward increases to 1.23. The goal is to minimize the value loss that is the difference between the actual future total reward in this example, 1.87, and its approximation to the value function, in this example, 1.23. The value loss makes estimates for future rewards more accurate.
+![image](https://github.com/FionaYuY/Generative-AI-with-Large-Language-Models_notes/blob/81df39a11da3ef7bc2f21104d0a0be10be635132/Week3_screenshots/0039.jpg)
+   - The value function is then used in Advantage Estimation in Phase 2. 
+4. Phase II
+   - In Phase 2, you make a small updates to the model and evaluate the impact of those updates on your alignment goal for the model. The model weights updates are guided by the prompt completion, losses, and rewards.
+   - PPO also ensures to keep the model updates within a certain small region called the trust region. This is where the proximal aspect of PPO comes into play. Ideally, this series of small updates will move the model towards higher rewards. The PPO policy objective is the main ingredient of this method. Remember, the objective is to find a policy whose expected reward is high. In other words, you're trying to make updates to the LLM weights that result in completions more aligned with human preferences and so receive a higher reward. The policy loss is the main objective that the PPO algorithm tries to optimize during training. 
+5. PPO Phase 2: Calculate policy loss
+![image](https://github.com/FionaYuY/Generative-AI-with-Large-Language-Models_notes/blob/81df39a11da3ef7bc2f21104d0a0be10be635132/Week3_screenshots/0041.jpg)
 
 
 
