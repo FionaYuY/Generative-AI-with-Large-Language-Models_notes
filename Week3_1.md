@@ -145,6 +145,42 @@
    - PPO also ensures to keep the model updates within a certain small region called the trust region. This is where the proximal aspect of PPO comes into play. Ideally, this series of small updates will move the model towards higher rewards. The PPO policy objective is the main ingredient of this method. Remember, the objective is to find a policy whose expected reward is high. In other words, you're trying to make updates to the LLM weights that result in completions more aligned with human preferences and so receive a higher reward. The policy loss is the main objective that the PPO algorithm tries to optimize during training. 
 5. PPO Phase 2: Calculate policy loss
 ![image](https://github.com/FionaYuY/Generative-AI-with-Large-Language-Models_notes/blob/81df39a11da3ef7bc2f21104d0a0be10be635132/Week3_screenshots/0041.jpg)
+   - The most important expression
+![image](https://github.com/FionaYuY/Generative-AI-with-Large-Language-Models_notes/blob/5f71c95279abbaffd6c9445a286a49817d0e08de/Week3_screenshots/0042.jpg)
+     + Pi of A_t given S_t in this context of an LLM, is the probability of the next token A_t given the current prompt S_t.
+     + The action A_t is the next token, and the state S_t is the completed prompt up to the token t.
+     + The denominator is the probability of the next token with the initial version of the LLM which is frozen.
+     + The numerator is the probabilities of the next token, through the updated LLM, which we can change for the better reward.
+     + A-hat_t is called the estimated advantage term of a given choice of action.
+     + The advantage term estimates how much better or worse the current action is compared to all possible actions at data state.
+     + We look at the expected future rewards of a completion following the new token, and we estimate how advantageous this completion is compared to the rest.       + There is a recursive formula to estimate this quantity based on the value function that we discussed earlier.
+     + The visual representation is shown in the phtoto. You have a prompt S, and you have different paths to complete it, illustrated by different paths on the figure.
+     + The advantage term tells you how better or worse the current token A_t is with respect to all the possible tokens. In this visualization, the top path which goes higher is better completion, receiving a higher reward. The bottom path goes down which is a worst completion. 
+![image](https://github.com/FionaYuY/Generative-AI-with-Large-Language-Models_notes/blob/5f71c95279abbaffd6c9445a286a49817d0e08de/Week3_screenshots/0043.jpg)
+     + Why does maximizing this term lead to higher rewards?
+       * Consider the case where the advantage is positive for the suggested token. A positive advantage means that the suggested token is better than the average. Therefore, increasing the probability of the current token seems like a good strategy that leads to higher rewards. This translates to maximizing the expression we have here. If the suggested token is worse than average, the advantage will be negative. Again, maximizing the expression will demote the token, which is the correct strategy. So the overall conclusion is that maximizing this expression results in a better aligned LLM.
+       * So, just maximizing the epression? Directly maximizing the expression would lead into problems because our calculations are reliable under the assumption that our advantage estimations are valid. The advantage estimates are valid only when the old and new policies are close to each other. This is where the rest of the terms come into play.
+   - So stepping back and looking at the whole equation again, what happens here is that you pick the smaller of the two terms.
+     + Notice that this second expression defines a region, where two policies are near each other.
+     + These extra terms are guardrails, and simply define a region in proximity to the LLM, where our estimates have small errors. This is called the trust region. These extra terms ensure that we are unlikely to leave the trust region.
+     + In summary, optimizing the PPO policy objective results in a better LLM without overshooting to unreliable regions.
+![image](https://github.com/FionaYuY/Generative-AI-with-Large-Language-Models_notes/blob/5f71c95279abbaffd6c9445a286a49817d0e08de/Week3_screenshots/0045.jpg)
+6. Any additional components? Yes. The entropy loss.
+![image](https://github.com/FionaYuY/Generative-AI-with-Large-Language-Models_notes/blob/5f71c95279abbaffd6c9445a286a49817d0e08de/Week3_screenshots/0046.jpg)
+   - While the policy loss moves the model towards alignment goal, entropy allows the model to maintain creativity. If you kept entropy low, you might end up always completing the prompt in the same way as shown in the photo. Higher entropy guides the LLM towards more creativity.
+   - This is similar to the temperature setting of LLM. The difference is that the temperature influences model creativity at the inference time, while the entropy influences the model creativity during training.
+7. Putting all terms together as a weighted sum, we get our PPO objective, which updates the model towards human preference in a stable manner.
+![image](https://github.com/FionaYuY/Generative-AI-with-Large-Language-Models_notes/blob/5f71c95279abbaffd6c9445a286a49817d0e08de/Week3_screenshots/0047.jpg)
+   - The C1 and C2 coefficients are hyperparameters.
+   - The PPO objective updates the model weights through back propagation over several steps. Once the model weights are updated, PPO starts a new cycle. For the next iteration, the LLM is replaced with the updated LLM, and a new PPO cycle starts. After many iterations, you arrive at the human-aligned LLM. 
+![image](https://github.com/FionaYuY/Generative-AI-with-Large-Language-Models_notes/blob/5f71c95279abbaffd6c9445a286a49817d0e08de/Week3_screenshots/0048.jpg)
+8. Any other reinforcement learning techniques that are used for RLHF?
+   - Q-learning is an alternate technique for fine-tuning LLMs through RL, but PPO is currently the most popular method.
+   - PPO is popular because it has the right balance of complexity and performance.
+   - That being said, fine-tuning the LLMs through human or AI feedback is an active area of research. We can expect many more developments in this area in the near future. For example, just before we were recording this video, researchers at Stanford published a paper describing a technique called direct preference optimization, which is a simpler alternate to RLHF. New methods like this are still in active development, and more work has to be done to better understand their benefits.
+
+
+
 
 
 
