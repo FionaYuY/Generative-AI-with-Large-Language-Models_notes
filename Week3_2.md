@@ -159,8 +159,8 @@ i[image](https://github.com/FionaYuY/Generative-AI-with-Large-Language-Models_no
 ![image](https://github.com/FionaYuY/Generative-AI-with-Large-Language-Models_notes/blob/5f726da2dc88b94e74e6a48352ecf3415a9e3aef/Week3_screenshots/0120.jpg)
 9. Remember, the LLM is your application's reasoning engine. Ultimately, it creates the plan that the orchestrator will interpret and execute. In PAL there's only one action to be carried out, the execution of Python code. The LLM doesn't really have to decide to run the code, it just has to write the script which the orchestrator then passes to the external interpreter to run. However, most real-world applications are likely to be more complicated than the simple PAL architecture. Your use case may require interactions with several external data sources. As you saw in the shop bot example, you may need to manage multiple decision points, validation actions, and calls to external applications. 
 
-
-
+## ReAct: combining reasoning and action
+1. 
 
 
 
