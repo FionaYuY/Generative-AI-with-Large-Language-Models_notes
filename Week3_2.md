@@ -119,8 +119,22 @@ i[image](https://github.com/FionaYuY/Generative-AI-with-Large-Language-Models_no
    - Structuring the prompts in the correct way is important for all of these tasks and can make a huge difference in the quality of a plan generated or the adherence to a desired output format specification.
 ![image](https://github.com/FionaYuY/Generative-AI-with-Large-Language-Models_notes/blob/3281ab5a11559ade7f88e3b7193704ef43bfe7f9/Week3_screenshots/0105.jpg)
 ​
+## Helping LLMs reason and plan with chain-of-thought
+1. Complex reasoning can be challenging for LLMs, especially for problems involve multiple steps or methematics. These problems exist even in large models that show good performance at many other tasks.
+![image](https://github.com/FionaYuY/Generative-AI-with-Large-Language-Models_notes/blob/6991ee193336eba79dc8d129038ade2d6c9debd3/Week3_screenshots/0107.jpg)
+2. Researchers have been exploring ways to improve the performance of large language models on reasoning tasks, like the one you just saw. One strategy that has demonstrated some success is prompting the model to think more like a human, by breaking the problem down into steps.
+3. The task here is to calculate how many tennis balls Roger has after buying some new ones. One way that a human might tackle this problem is as follows. Begin by determining the number of tennis balls Roger has at the start. Then note that Roger buys two cans of tennis balls. Each can contains three balls, so he has a total of six new tennis balls. Next, add these 6 new balls to the original 5, for a total of 11 balls. Then finish by stating the answer.
+4. These intermediate calculations form the reasoning steps that a human might take, and the full sequence of steps illustrates the chain of thought that went into solving the problem. Asking the model to mimic this behavior is known as 'chain of thought prompting'. 
+![image](https://github.com/FionaYuY/Generative-AI-with-Large-Language-Models_notes/blob/6991ee193336eba79dc8d129038ade2d6c9debd3/Week3_screenshots/0108.jpg)
+5. Chain of thought prompting
+   - It works by including a series of intermediate reasoning steps into any examples that you use for one or few-shot inference. By structuring the examples in this way, you're essentially teaching the model how to reason through the task to reach a solution.
+![image](https://github.com/FionaYuY/Generative-AI-with-Large-Language-Models_notes/blob/6991ee193336eba79dc8d129038ade2d6c9debd3/Week3_screenshots/0109.jpg)
+   - Notice that the model has now produced a more robust and transparent response that explains its reasoning steps, following a similar structure as the one-shot example. Thinking through the problem has helped the model come to the correct answer. One thing to note is that while the input prompt is shown here in a condensed format to save space, the entire prompt is actually included in the output. You can use chain of thought prompting to help LLMs improve their reasoning of other types of problems too, in addition to arithmetic.
+   - Chain of thought prompting is a powerful technique that improves the ability of your model to reason through problems. While this can greatly improve the performance of your model, the limited math skills of LLMs can still cause problems if your task requires accurate calculations, like totaling sales on an e-commerce site, calculating tax, or applying a discount.
 
-
+## Program-aided language models (PAL)
+1. While you can try using chain of thought prompting to overcome some part of the limitation of mathematical operation of LLMs, it may still get the individual math operations wrong even if the modle correctly reasons through a problem, especially with larger numbers or complex operations.
+2. Remember, the model isn't actually doing any real math here. It is simply trying to predict the most probable tokens that complete the prompt. 
 
 
 
