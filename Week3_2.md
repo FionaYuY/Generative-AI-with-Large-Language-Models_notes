@@ -50,8 +50,12 @@ i[image](https://github.com/FionaYuY/Generative-AI-with-Large-Language-Models_no
 ![image](https://github.com/FionaYuY/Generative-AI-with-Large-Language-Models_notes/blob/4892d7817c8760c571024eace9cf7a0fed787ce5/Week3_screenshots/0082.jpg)
 8. Quantization, Distillation and Pruning all aim to reduce model size to improve model performance during inference without impacting accuracy. 
 
-
-
-
+## Generative AI Project Lifecycle Cheat Sheet
+![image](https://github.com/FionaYuY/Generative-AI-with-Large-Language-Models_notes/blob/c48e2838178453a03f257e5546beee0b73fa29b3/Week3_screenshots/0083.jpg)
+1. This cheat sheet provides some indication of the time and effort required for each phase of work.
+2. Pre-training a large language model can be a huge effort. This stage is the most complex you'll face because of the model architecture decisions, the large amount of training data required, and the expertise needed. Remember though, that in general, you will start your development work with an existing foundation model. You'll probably be able to skip this stage.
+3. If you're working with a foundation model, you'll likely start to assess the model's performance through prompt engineering, which requires less technical expertise, and no additional training of the model. If your model isn't performing as you need, you'll next think about prompt tuning and fine tuning. Depending on your use case, performance goals, and compute budget, the methods you'll try could range from full fine-tuning to parameter efficient fine tuning techniques like LoRA or prompt tuning. Some level of technical expertise is required for this work. But since fine-tuning can be very successful with a relatively small training dataset, this phase could potentially be completed in a single day.
+4. Aligning your model using reinforcement learning from human feedback can be done quickly, once you have your train reward model. You'll likely see if you can use an existing reward model for this work. However, if you have to train a reward model from scratch, it could take a long time because of the effort involved to gather human feedback.
+5. Finally, optimization techniques you learned about in the last video, typically fall in the middle in terms of complexity and effort, but can proceed quite quickly assuming the changes to the model don't impact performance too much. After working through all of these steps, you have hopefully trained in tuned a gray LLM that is working well for your specific use case, and is optimized for deployment.
 
 
