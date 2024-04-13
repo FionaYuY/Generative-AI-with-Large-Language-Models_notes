@@ -23,7 +23,8 @@ The official lecture notes is on : https://community.deeplearning.ai/t/genai-wit
 2. The following photos are a collection of foundation models, sometimes called 'base models'.
 ![image](https://github.com/FionaYuY/Generative-AI-with-Large-Language-Models_notes/blob/51907c27bf39acd139b3aa5cd88b6fcfff0420e9/screenshots%20of%20lecture%20slides/0008.jpg)
 3. The more parameters a model has, the more memory, and the more sophisticated the tasks it can perform
-4. Generative AI models are being created for 'multiple modalities'.
+4. Generative AI models are being created for 'multiple modalities'. ("Multiple modalities" in the context of generative AI models refer to the ability of these models to generate content across different sensory modalities or types of data. )
+For instance, a generative AI model might be able to generate not just text, but also images, audio, or even video. This capability allows the model to create diverse content across various formats, making it versatile in its creative output.
 5. LLMs are able to take natuaral language or human written instructions and perform taskes much as a human would.
 6. The text you pass to an LLm is 'prompt', and the space or memory that is available to the prompt is 'context window', and the output of the model is 'completion'. The act of using the model to generate text is 'inference'.
 7. The 'completion' is comprised of the text contained in the original prompt, followed by the generated text.
