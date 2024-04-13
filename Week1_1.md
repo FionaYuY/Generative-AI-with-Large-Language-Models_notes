@@ -26,7 +26,7 @@ The official lecture notes is on : https://community.deeplearning.ai/t/genai-wit
 4. Generative AI models are being created for 'multiple modalities'. ("Multiple modalities" in the context of generative AI models refer to the ability of these models to generate content across different sensory modalities or types of data. )
 For instance, a generative AI model might be able to generate not just text, but also images, audio, or even video. This capability allows the model to create diverse content across various formats, making it versatile in its creative output.
 5. LLMs are able to take natuaral language or human written instructions and perform taskes much as a human would.
-6. The text you pass to an LLm is 'prompt', and the space or memory that is available to the prompt is 'context window', and the output of the model is 'completion'. The act of using the model to generate text is 'inference'.
+6. The text you pass to an LLM is 'prompt', and the space or memory that is available to the prompt is 'context window', and the output of the model is 'completion'. The act of using the model to generate text is 'inference'.
 7. The 'completion' is comprised of the text contained in the original prompt, followed by the generated text.
 
 ## LLM use cases and tasks
@@ -43,7 +43,7 @@ For instance, a generative AI model might be able to generate not just text, but
 3. With just one previous words seen by the model, the prediction can't be very good.
 4. Even though you scale the model, it still hasn't seen enough of the input.
 5. Understanding language can be challenging.
-6. 'Homonyms'(同音異義): ex, I took my money to the 'bank'.
+6. 'Homonyms'(同音異義): ex, I took my money to the 'bank'.(銀行or river bank?)
 7. 'Syntactic ambiguity': ex, The teacher taught the student with the book. -> teacher's book? student's book?
 8. 'Attention is all you need': transformer architecture -> everything changed.
 9. 'Transformer architecture'
