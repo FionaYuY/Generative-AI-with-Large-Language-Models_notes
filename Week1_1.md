@@ -111,15 +111,20 @@ For instance, a generative AI model might be able to generate not just text, but
 2. There are many ways to use the output from the softmax layer to predict the next token, these can influence how creative the generated text is.
 3. In conclusion, the transformer architecture consists of encoder and decoder component.
    ![image](https://github.com/FionaYuY/Generative-AI-with-Large-Language-Models_notes/blob/e997f2ff98b6edc5ffe281ea20ccd831ad8ebe31/screenshots%20of%20lecture%20slides/0061.jpg)
-4. Encoder Only models
+4. "Sequence-to-sequence" (often abbreviated as seq2seq)
+   - refers to a type of model architecture used in machine learning, particularly in tasks involving sequences of data.
+   - In a sequence-to-sequence model, the input and output are both sequences of data, which can vary in length. This architecture is commonly used in tasks such as machine translation, text summarization, and speech recognition, among others.
+   - The basic idea behind sequence-to-sequence models is to have an encoder-decoder architecture. The encoder takes the input sequence and processes it into a fixed-dimensional vector, often called the "context" or "thought vector," which contains a condensed representation of the input sequence. The decoder then takes this context vector and generates the output sequence step by step.
+   - Sequence-to-sequence models are often implemented using recurrent neural networks (RNNs) or more advanced variants like long short-term memory networks (LSTMs) or gated recurrent units (GRUs). These models have shown success in various natural language processing tasks where the input and output are sequences of variable lengths.
+5. Encoder Only models
    - also works as sequence-to-sequence models, but without further modification, the input sequence and the output sequence are the same length. 
    - less common these days, but by adding additional layers to the architecture, you can train encoder-only models to perform classification tasks such as sentiment analysis.
    - ex: BERT
-5. Encoder-decoder models
+6. Encoder-decoder models
    - perform well on sequence-to-sequence tasks such as translation, where the input sequence and the output sequence can be in different lengths.
    - By scaling and training this kind of model, it can perform general text generation tasks.
    - ex: BART 
-4. Decoder-only models
+7. Decoder-only models
    - some of the most commonly used today
    - once they're scaled, their capabilities have grown.
    - These models can now generalize to most tasks.
