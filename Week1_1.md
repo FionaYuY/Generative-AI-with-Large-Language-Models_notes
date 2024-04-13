@@ -53,7 +53,7 @@ For instance, a generative AI model might be able to generate not just text, but
   
 ## Transformers architecture
 1. The power of the transformer architecture lies in its ability to learn the relevance and context of all of the words in a setence.
-   Not just to each word next to its neighbot, but to every other word in the setence.
+   Not just to each word next to its neighbor, but to every other word in the setence.
 ![image](https://github.com/FionaYuY/Generative-AI-with-Large-Language-Models_notes/blob/a3391b9a307d6699c8ce0395b89ca29362fcb720/screenshots%20of%20lecture%20slides/0032.jpg)
 ![image](https://github.com/FionaYuY/Generative-AI-with-Large-Language-Models_notes/blob/a3391b9a307d6699c8ce0395b89ca29362fcb720/screenshots%20of%20lecture%20slides/0033.jpg)
 2. To apply attention weights to those relationships so that the model learns the relevance of each word to each other word.
