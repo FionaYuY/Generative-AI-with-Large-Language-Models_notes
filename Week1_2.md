@@ -47,7 +47,7 @@
   9. Comparison of the different model architectures and the targets off the pre-training objectives.
      ![image](https://github.com/FionaYuY/Generative-AI-with-Large-Language-Models_notes/blob/ffb9eb8e58b2dabd3f370408116a486cb0a08cda/screenshots%20of%20lecture%20slides/0106.jpg)
   10. The larger a model, the more likely it is to work as you needed to without additional in-context learning or further training.
-      ![image](https://github.com/FionaYuY/Generative-AI-with-Large-Language-Models_notes/blob/ffb9eb8e58b2dabd3f370408116a486cb0a08cda/screenshots%20of%20lecture%20slides/0108.jpg)
+     ![image](https://github.com/FionaYuY/Generative-AI-with-Large-Language-Models_notes/blob/7a529f0c47e1d9dc6daed52deb67067a8636f756/screenshots%20of%20lecture%20slides/0108.jpg)
   11. "Span corruption" is a technique used in some pre-training methods for language models, specifically in the context of self-supervised learning. Unlike Masked Language Modeling (MLM), where individual tokens or words are masked or hidden from the model, span corruption involves masking or removing longer sequences of consecutive tokens or entire spans of text. Here's a bit more detail on the process:
 
    - A span of text, which could be a few consecutive words, is selected randomly from a sentence.
