@@ -62,7 +62,7 @@ Span corruption forces the model to rely on a broader context, enhancing its abi
 2. 'CUDA': Compute Unified Device Architecture, is a collection of libraries and tools developed for Nvidia GPUs.
 3. Libraries such as PyTorch and TensorFlow use CUDA to boost performance on metrics multiplication and other operations common to deep learning
 4. Approximate GPU RAM needed to store 1B parameters
-![image](https://github.com/FionaYuY/Generative-AI-with-Large-Language-Models_notes/blob/a3ecf15266bcb68af6f4984263598c576a27e34e/screenshots%20of%20lecture%20slides/0111.jpg)
+![image](https://github.com/FionaYuY/Generative-AI-with-Large-Language-Models_notes/blob/65f13d927eeec12d65e0399074820adbbd03a74c/screenshots%20of%20lecture%20slides/0111.jpg)
 ![image](https://github.com/FionaYuY/Generative-AI-with-Large-Language-Models_notes/blob/81a4208e619e56ecb26fc2041073b35b0ec1054a/screenshots%20of%20lecture%20slides/%E8%9E%A2%E5%B9%95%E6%93%B7%E5%8F%96%E7%95%AB%E9%9D%A2%20(666).png)
 ![image](https://github.com/FionaYuY/Generative-AI-with-Large-Language-Models_notes/blob/da9f2965a853248ab8f453aad528749b449b00d5/screenshots%20of%20lecture%20slides/0113.jpg)
 6. 'Qunatization'
