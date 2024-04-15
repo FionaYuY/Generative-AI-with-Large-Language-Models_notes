@@ -48,7 +48,14 @@
      ![image](https://github.com/FionaYuY/Generative-AI-with-Large-Language-Models_notes/blob/ffb9eb8e58b2dabd3f370408116a486cb0a08cda/screenshots%20of%20lecture%20slides/0106.jpg)
   10. The larger a model, the more likely it is to work as you needed to without additional in-context learning or further training.
       ![image](https://github.com/FionaYuY/Generative-AI-with-Large-Language-Models_notes/blob/ffb9eb8e58b2dabd3f370408116a486cb0a08cda/screenshots%20of%20lecture%20slides/0108.jpg)
-       
+  11. "Span corruption" is a technique used in some pre-training methods for language models, specifically in the context of self-supervised learning. Unlike Masked Language Modeling (MLM), where individual tokens or words are masked or hidden from the model, span corruption involves masking or removing longer sequences of consecutive tokens or entire spans of text. Here's a bit more detail on the process:
+
+   - A span of text, which could be a few consecutive words, is selected randomly from a sentence.
+   - This span is then replaced with a special token (or tokens) indicating that a span has been removed.
+   - The language model's task during training is then to predict the removed span, not just single words. This requires understanding and generating multiple words in the correct order, which can be more challenging than predicting individual tokens.
+   - By predicting spans rather than individual words, the model may learn to understand and generate more coherent pieces of text, improving its ability to handle complex language tasks.
+
+Span corruption forces the model to rely on a broader context, enhancing its ability to understand and generate longer sequences of text, which is beneficial for various natural language processing tasks.
 ## Computational challenges of training LLMs
 ![image](https://github.com/FionaYuY/Generative-AI-with-Large-Language-Models_notes/blob/a3ecf15266bcb68af6f4984263598c576a27e34e/screenshots%20of%20lecture%20slides/0110.jpg)
 1. 'Out of memory': Because most LLMs are huge, and require a ton of memeory to store and train all their parameters.
