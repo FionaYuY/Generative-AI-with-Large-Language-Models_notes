@@ -24,6 +24,7 @@
 7. Decoder-only models:
    - also known as Autoregressive models
    - they are pre-trained using causal language modeling.
+     + Causal Language Modeling is a way to teach a language model to predict the next word in a sentence based on the words that come before it. It's like completing a sentence where you always look back at the previous words to decide what comes next, but you never peek ahead.
    - The training objective is to predict the next token based on the previous sequence of tokens. Predicting the next token is sometimes called 'full language modeling'
    - Decoder-based autoregressive models, mask the input sequence and can only see the input tokens leading up to the token in question.
    - The model has no knowledge of the end of the sentence.
