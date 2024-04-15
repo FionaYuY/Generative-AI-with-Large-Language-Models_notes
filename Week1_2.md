@@ -83,7 +83,19 @@ Span corruption forces the model to rely on a broader context, enhancing its abi
 ![image](https://github.com/FionaYuY/Generative-AI-with-Large-Language-Models_notes/blob/da9f2965a853248ab8f453aad528749b449b00d5/screenshots%20of%20lecture%20slides/0120.jpg)
 10. As model scale beyond a few billion parameters, you need to turn to distributed computeing techniques while you train your model across multiple GPUs.
 ![image](https://github.com/FionaYuY/Generative-AI-with-Large-Language-Models_notes/blob/da9f2965a853248ab8f453aad528749b449b00d5/screenshots%20of%20lecture%20slides/0122.jpg)
+11. Quantization-aware training (QAT) is a technique used in machine learning, especially deep learning, where the model is trained to account for the effects of quantization. Here's what happens during QAT:
 
+ - **Quantization**: This refers to reducing the precision of the numbers used in a model. For instance, going from 32-bit floating-point numbers to 8-bit integers.
+
+ - **Awareness During Training**: In typical training, models use higher precision (like 32-bit floats). When these models are quantized post-training, they can lose accuracy because they weren't trained to handle lower precision. QAT simulates lower precision during training so the model learns to maintain accuracy even when quantized.
+
+ - **Simulating Low Precision**: During QAT, calculations mimic the lower precision by inserting fake quantization nodes into the model. These simulate the lower bit-depth numbers during the forward and backward passes of training.
+
+ - **Adjusting Weights and Activations**: Because the model "knows" it will be quantized, it adjusts its weights and activation functions during training to minimize the loss of information.
+
+ - **Final Quantization**: After training with awareness of quantization, the model is then actually quantized. Because it was trained for this, it should perform better than a model that was quantized without this special training.
+
+QAT is particularly valuable when deploying models to environments with limited computational resources, such as mobile devices or embedded systems, where it's important to have smaller models that run faster and use less power.
 ## Effiecient multi-GPU compute strategies
 1. The first step in scaling model training is to distribute large data-sets across multiple GPUs and process these batches of data in parallel.
 2. A popular implementation of this model replication technique is PyTorch's 'Distributed Data Parallel (DDP)'.
