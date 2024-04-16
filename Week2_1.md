@@ -91,8 +91,8 @@
 6. ROUGE-1
    - The recall metric measures the number of words or unigrams that are matched between the refernce and the generated output divided by the number of words or unigrams in the reference.
    - precision measures the unigram matches divided by the output size.
-   - F1 score is the n=harmonic mean of both recall and precision.
-   - Very basic metrics that only focused on individual words, and don't consider the ordering of the words. -> It can be deceptive. It's easily possible to generate sentences that score well bur would be subjectively poor.
+   - F1 score is the harmonic mean of both recall and precision.
+   - Very basic metrics that only focused on individual words, and don't consider the ordering of the words. -> It can be deceptive. It's easily possible to generate sentences that score well but would be subjectively poor.
 ![image](https://github.com/FionaYuY/Generative-AI-with-Large-Language-Models_notes/blob/4fa1dd86ad50a603d4eaaee8ad695f2bb98b3546/week2_screenshots/0055.jpg)
 ![image](https://github.com/FionaYuY/Generative-AI-with-Large-Language-Models_notes/blob/4fa1dd86ad50a603d4eaaee8ad695f2bb98b3546/week2_screenshots/0056.jpg)
    - You can get a slightly better score by taking into account bigrams at at time from the reference and generated sentence. -> you can consider the order of the words
@@ -110,7 +110,7 @@
    - The score itself is calculated using the average precision over multiple n-gram sizes
    - quantifies the quality of a translation by checking how many n-grams in the machine-generated translation match those in the reference translation.
 ![image](https://github.com/FionaYuY/Generative-AI-with-Large-Language-Models_notes/blob/2039fe847d07555b7580c3377bcb4c4abaad5e0b/week2_screenshots/0065.jpg)
-8. Both rouge and BLEU are quite simple metrics and are relatively low-cost to calculate. Use them for simple reference as you iterate over your models, but you shouldn't use them alone to report the final evaluation. For overall evaluation of your model's performance, you will need to look at one of the evaluation benchmarks.
+8. Both ROUGE and BLEU are quite simple metrics and are relatively low-cost to calculate. Use them for simple reference as you iterate over your models, but you shouldn't use them alone to report the final evaluation. For overall evaluation of your model's performance, you will need to look at one of the evaluation benchmarks.
 
 ## Benchmarks 
 1. Selecting the right evaluation dataset is important. And you should consider whether the model has seen your evaluation data during training.
@@ -121,11 +121,11 @@
    - a successor to GLUE
    - consists of a series of tasks such as multi-sentence reasoning, reading comprehension.
 5. Both GLUE and SuperGLUE have leaderboards that can be used to compare and contrast evaluated models.
-6. As models get larger, their performance on benchmarks start to match human ability on specific tasks. But there are not performing at human level at tasks in general. -> There is an arms racebetween the emergent properties of LLMs, and the benchmarks that aim to measure them.
+6. As models get larger, their performance on benchmarks start to match human ability on specific tasks. But there are not performing at human level at tasks in general. -> There is an arms race between the emergent properties of LLMs, and the benchmarks that aim to measure them.
 7. MMLU (Massive Multitask Language Understanding) is designed for modern LLMs.
    - Models are tested on elementary mathematics, US history, computer science, law, and more -> tasks that extend way beyond basic language understanding
 8. BIG-bench
-   -consists of 204 tasks, ranging through linguistics, childhood development, math, common sense reasoning, biology, physics, social bias, software development and more.
+   - consists of 204 tasks, ranging through linguistics, childhood development, math, common sense reasoning, biology, physics, social bias, software development and more.
    - BIG-bench comes in three different sizes, and part of the reason for this is to keep costs achievable, as running these large benchmarks can incur large inference costs.
 9. HELM (Holistic Evaluation of Language Models)
     - Aims to improve the transparency of models, and to offer guidance on which models perform well for specific tasks.
@@ -146,8 +146,8 @@
 4. With parameter efficient fine-tuning, you train only a small number of weights, which results in a much smaller footprint overall. The new parameters are combined with the original LLM weights for inference. The PEFT weights are trained for each task and can be easily swapped out for inference, allowing efficient adaptation of the original model to multiple tasks.
 ![image](https://github.com/FionaYuY/Generative-AI-with-Large-Language-Models_notes/blob/e21aee417db84221b4b3921a9f6ec3ee53196a0d/week2_screenshots/0085.jpg)
 5. There are several methods you can use for parameter efficient fine-tuning, each with trade-offs on parameter efficiency, memory efficiency, training speed, model quality, and inference costs.
-![image]![image](https://github.com/FionaYuY/Generative-AI-with-Large-Language-Models_notes/blob/2039fe847d07555b7580c3377bcb4c4abaad5e0b/week2_screenshots/0086.jpg)
-)
+![image](https://github.com/FionaYuY/Generative-AI-with-Large-Language-Models_notes/blob/2039fe847d07555b7580c3377bcb4c4abaad5e0b/week2_screenshots/0086.jpg)
+
 6. Three main classes of PEFT methods
    - Selective methods
      * Fine-tune only a subset of the original LLM parameters
