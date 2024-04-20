@@ -102,7 +102,7 @@ While automation is about using software to execute tasks without human interven
 ![image](https://github.com/FionaYuY/Generative-AI-with-Large-Language-Models_notes/blob/3281ab5a11559ade7f88e3b7193704ef43bfe7f9/Week3_screenshots/0099.jpg)
 10. By providing up to date relevant information and avoiding hallucinations, you can greatly improve the experience of using your application for your users.
 
-## Interacting with edxternal applications
+## Interacting with external applications
 1. During this walkthrough of one customer's interaction with ShopBot, you'll take a look at the integrations that you'd need to allow the app to process a return requests from end to end.
    - In this conversation, the customer has expressed that they want to return some genes that they purchased. ShopBot responds by asking for the order number, which the customer then provides. ShopBot then looks up the order number in the transaction database. One way it could do this is by using a rag implementation of the kind you saw earlier in the previous video.
    - In this case here, you would likely be retrieving data through a SQL query to a back-end order database rather than retrieving data from a corpus of documents. Once ShopBot has retrieved the customers order, the next step is to confirm the items that will be returned. The bot ask the customer if they'd like to return anything other than the genes.
