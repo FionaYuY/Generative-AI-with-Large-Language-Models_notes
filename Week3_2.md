@@ -123,7 +123,7 @@ While automation is about using software to execute tasks without human interven
 ![image](https://github.com/FionaYuY/Generative-AI-with-Large-Language-Models_notes/blob/3281ab5a11559ade7f88e3b7193704ef43bfe7f9/Week3_screenshots/0105.jpg)
 ​
 ## Helping LLMs reason and plan with chain-of-thought
-1. Complex reasoning can be challenging for LLMs, especially for problems involve multiple steps or methematics. These problems exist even in large models that show good performance at many other tasks.
+1. Complex reasoning can be challenging for LLMs, especially for problems involve multiple steps or ma thematics. These problems exist even in large models that show good performance at many other tasks.
 ![image](https://github.com/FionaYuY/Generative-AI-with-Large-Language-Models_notes/blob/6991ee193336eba79dc8d129038ade2d6c9debd3/Week3_screenshots/0107.jpg)
 2. Researchers have been exploring ways to improve the performance of large language models on reasoning tasks, like the one you just saw. One strategy that has demonstrated some success is prompting the model to think more like a human, by breaking the problem down into steps.
 3. The task here is to calculate how many tennis balls Roger has after buying some new ones. One way that a human might tackle this problem is as follows. Begin by determining the number of tennis balls Roger has at the start. Then note that Roger buys two cans of tennis balls. Each can contains three balls, so he has a total of six new tennis balls. Next, add these 6 new balls to the original 5, for a total of 11 balls. Then finish by stating the answer.
@@ -177,7 +177,7 @@ While automation is about using software to execute tasks without human interven
    - In the case of the ReAct framework, the authors created a small Python API to interact with Wikipedia.
    - The three allowed actions are search (which looks for a Wikipedia entry about a particular topic), lookup (which searches for a string on a Wikipedia page), and finish (which the model carries out when it decides it has determined the answer).
    - As you saw on the previous slide, the thought in the prompt identified two searches to carry out, one for each magazine. In this example, the first search will be for Arthur's magazine. The action is formatted using the specific square bracket notation you see here, so that the model will format its completions in the same way. The Python interpreter searches for this code to trigger specific API actions.
-   - The last part of the prompt template is the observation, this is where the new information provided by the external search is brought into the context of the prompt. for the model to interpret.
+   - The last part of the prompt template is the observation, this is where the new information provided by the external search is brought into the context of the prompt for the model to interpret.
 ![image](https://github.com/FionaYuY/Generative-AI-with-Large-Language-Models_notes/blob/8a6a1cdc13cab5b3f6606dbb8756346fa0081e9b/Week3_screenshots/0127.jpg)
    - The prompt then repeats the cycle as many times as is necessary to obtain the final answer.
    - In the second thought, the prompt states the start year of Arthur's magazine and identifies the next step needed to solve the problem. The second action is to search for first for women, and the second observation includes text that states the start date of the publication, in this case 1989. At this point, all the information required to answer the question is known.
